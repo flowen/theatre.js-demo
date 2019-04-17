@@ -1,0 +1,24 @@
+.main {
+  h1 {
+    text-align: center;
+  }
+}
+
+.wrapper {
+  position: relative;
+  width: 50vw;
+  min-height: 50vh;
+  margin: 0 auto;
+  border: 1px dotted firebrick;
+
+  .ball {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    background: $color-purple;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

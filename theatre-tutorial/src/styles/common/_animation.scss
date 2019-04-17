@@ -1,0 +1,17 @@
+.not-visible {
+  visibility: hidden;
+}
+
+.is-visible {
+  visibility: visible;
+}
+
+.not-opaque {
+  opacity: 0;
+  transition: opacity 0.5s $ease-out;
+}
+
+.is-opaque {
+  opacity: 1;
+  transition: opacity 0.5s $ease-in;
+}
