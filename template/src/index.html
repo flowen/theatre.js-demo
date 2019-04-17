@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <main class="main">
+      <!-- canvas, dat.gui, etc -->
+    </main>
+    <aside class="modal"></aside>
+
+    <script src="<%= htmlWebpackPlugin.files.chunks.build.entry %>"></script>
+  </body>
+</html>
