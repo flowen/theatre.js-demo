@@ -12,9 +12,9 @@ import {
   Scene,
   PerspectiveCamera,
   PointLight,
-  AudioListener,
-  AudioLoader,
   Audio,
+  AudioListener,
+  AudioAnalyser,
 } from 'three'
 
 import OrbitControls from './controls/OrbitControls'
@@ -22,11 +22,7 @@ import { preloader } from './loader'
 import { TextureResolver } from './loader/resolvers/TextureResolver'
 import { ImageResolver } from './loader/resolvers/ImageResolver'
 import { GLTFResolver } from './loader/resolvers/GLTFResolver'
-
-// audio analyser and averager
-// import average from 'analyser-frequency-average'
-// import player from './utils/audioplayer'
-// import { audioUtil, analyser, bands } from './utils/analyser'
+import { AudioResolver } from './loader/resolvers/AudioResolver'
 
 /* Custom settings */
 const SETTINGS = {
@@ -69,20 +65,54 @@ scene.add(backLight)
 frontLight.position.set(20, 20, 20)
 backLight.position.set(-20, -20, 20)
 
+/* Audio */
+const listener = new AudioListener()
+camera.add(listener)
+
+const audio = new Audio(listener)
+let analyser
+
 /* Various event listeners */
 window.addEventListener('resize', onResize)
 
 /* Preloader */
-preloader.init(new ImageResolver(), new GLTFResolver(), new TextureResolver())
+preloader.init(
+  new ImageResolver(),
+  new GLTFResolver(),
+  new TextureResolver(),
+  new AudioResolver()
+)
 preloader
   .load([
     { id: 'searchImage', type: 'image', url: SMAAEffect.searchImageDataURL },
     { id: 'areaImage', type: 'image', url: SMAAEffect.areaImageDataURL },
+    {
+      id: 'soundTrack',
+      type: 'audio',
+      url: require('./assets/audio/mert.mp3'),
+    },
   ])
   .then(() => {
     initPostProcessing()
     onResize()
-    animate()
+
+    const audioBuffer = preloader.get('soundTrack')
+    audio.setBuffer(audioBuffer)
+    audio.setLoop(false)
+    audio.setVolume(0.25)
+
+    // create an AudioAnalyser, passing in the sound and desired fftSize
+    analyser = new AudioAnalyser(audio, 32)
+
+    const playButton = document.querySelector('.play')
+    const start = () => {
+      audio.play()
+      animate()
+
+      playButton.style.opacity = 0
+      playButton.removeEventListener('click', start)
+    }
+    playButton.addEventListener('click', start)
 
     /* Actual content of the scene */
   })
@@ -155,6 +185,9 @@ function render() {
     stats.begin()
   }
 
+  // get the average frequency of the sound
+  const data = analyser.getAverageFrequency()
+  console.log(data)
   controls.update()
   if (SETTINGS.useComposer) {
     composer.render()

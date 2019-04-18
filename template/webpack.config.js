@@ -65,6 +65,10 @@ module.exports = env => {
             'css-loader',
           ],
         },
+        {
+          test: /\.mp3$/,
+          loader: 'file-loader',
+        },
       ],
     },
   }
