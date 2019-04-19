@@ -190,6 +190,7 @@ if (DEVELOPMENT) {
 
 /* Postprocessing -------------------------------------------------------------------------------- */
 function initPostProcessing() {
+  // add postprocessing effects: bloomPass, fxaaPass, noise, vignette, dof
   composer = new EffectComposer(renderer)
   const bloomEffect = new BloomEffect()
   const smaaEffect = new SMAAEffect(
@@ -236,8 +237,7 @@ function render() {
 
   // calculate sound inputs and use them to render specific outputs
   // get the average frequency of the sound
-  const data = analyser.getAverageFrequency()
-  console.log(data)
+  const avg = analyser.getAverageFrequency()
 
   // set attractor (optionally bind to mouse)
   attractor.set(Math.cos(-time), Math.sin(time), Math.cos(time))
@@ -249,10 +249,12 @@ function render() {
   for (let i = 0; i < particleVertices.length; i++) {
     const currentVector = particleVertices[i]
 
-    for (let j = 0; j < SETTINGS.addForceInIterations; j++) {
-      // than we apply forces of all attractors to particle and calculate direction
-      const attraction = particles.calculateForce(attractor, currentVector)
-      particles.applyForce(attraction, i)
+    if (avg > 100) {
+      for (let j = 0; j < SETTINGS.addForceInIterations; j++) {
+        // than we apply forces of all attractors to particle and calculate direction
+        const attraction = particles.calculateForce(attractor, currentVector)
+        particles.applyForce(attraction, i)
+      }
     }
   }
 
