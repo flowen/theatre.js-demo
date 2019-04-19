@@ -52,6 +52,7 @@ const SETTINGS = {
   followMouse: false,
   tsmooth: 0.75,
   clampVEL: 0.02,
+  addForceInIterations: 1,
 }
 // basically the next few variables are all feeders for procedural functions such as noise, movement, etc
 let subAvg = 0
@@ -104,7 +105,6 @@ window.addEventListener('resize', onResize)
 
 /* Objects */
 const particleCount = 100000
-const iAttractions = 3
 
 // init particles & attractor
 const particles = new Particles(particleCount)
@@ -173,6 +173,11 @@ if (DEVELOPMENT) {
     .min(0.001)
     .max(1)
     .step(0.001)
+  gui
+    .add(SETTINGS, 'addForceInIterations')
+    .min(1)
+    .max(10)
+    .step(1)
 
   const Stats = require('stats.js')
   stats = new Stats()
@@ -237,14 +242,15 @@ function render() {
   // set attractor (optionally bind to mouse)
   attractor.set(Math.cos(-time), Math.sin(time), Math.cos(time))
 
-  // particles
+  // draw the particles with calculated velocity and acceleration
   particles.update()
-  const particleVertices = particles.points.geometry.vertices
 
+  const particleVertices = particles.points.geometry.vertices
   for (let i = 0; i < particleVertices.length; i++) {
     const currentVector = particleVertices[i]
-    // than we apply forces of all attractors to particle and calculate direction
-    for (let j = 0; j < iAttractions; j++) {
+
+    for (let j = 0; j < SETTINGS.addForceInIterations; j++) {
+      // than we apply forces of all attractors to particle and calculate direction
       const attraction = particles.calculateForce(attractor, currentVector)
       particles.applyForce(attraction, i)
     }
