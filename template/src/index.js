@@ -24,6 +24,30 @@ import { ImageResolver } from './loader/resolvers/ImageResolver'
 import { GLTFResolver } from './loader/resolvers/GLTFResolver'
 import { AudioResolver } from './loader/resolvers/AudioResolver'
 
+// import Theatre from 'theatre'
+
+// const project = Theatre.getProject('Test project')
+
+// const timeline = project.getTimeline('Main timeline')
+
+// const nPlay = document.querySelector('.play')
+// const play = timeline.getObject('Ball', nPlay, {
+//   props: {
+//     y: {
+//       type: 'number',
+//     },
+//     stretch: {
+//       type: 'number',
+//     },
+//   },
+// })
+
+// play.onValuesChange(newValues => {
+//   nPlay.style.transform = `translateY(${-newValues.y}px)
+//                            scaleY(${newValues.stretch})
+//                            scaleX(${1 / newValues.stretch})`
+// })
+
 /* Custom settings */
 const SETTINGS = {
   useComposer: true,
@@ -188,6 +212,7 @@ function render() {
   // get the average frequency of the sound
   const data = analyser.getAverageFrequency()
   console.log(data)
+
   controls.update()
   if (SETTINGS.useComposer) {
     composer.render()

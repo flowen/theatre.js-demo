@@ -30,6 +30,7 @@
   "dependencies": {
     "file-loader": "^3.0.1",
     "postprocessing": "*",
+    "theatre": "^0.1.22",
     "three": "*"
   }
 }
