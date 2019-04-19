@@ -55,3 +55,12 @@ a {
   height: 50px;
   background: #ffaaff;
 }
+
+/* to solve passive eventlistener problem (doesnt work???) */
+html,
+body,
+.main,
+.main canvas,
+.play {
+  touch-action: none;
+}

@@ -7,6 +7,7 @@ import {
   RenderPass,
   EffectPass,
 } from 'postprocessing'
+
 import {
   WebGLRenderer,
   Scene,
@@ -15,6 +16,7 @@ import {
   Audio,
   AudioListener,
   AudioAnalyser,
+  Vector3,
 } from 'three'
 
 import OrbitControls from './controls/OrbitControls'
@@ -24,29 +26,24 @@ import { ImageResolver } from './loader/resolvers/ImageResolver'
 import { GLTFResolver } from './loader/resolvers/GLTFResolver'
 import { AudioResolver } from './loader/resolvers/AudioResolver'
 
-// import Theatre from 'theatre'
+import Particles from './objects/Particles'
+import Theatre from 'theatre'
 
-// const project = Theatre.getProject('Test project')
+const project = Theatre.getProject('Theatre demo')
+const timeline = project.getTimeline('Main timeline')
 
-// const timeline = project.getTimeline('Main timeline')
+const nPlay = document.querySelector('.play')
+const play = timeline.getObject('Ball', nPlay, {
+  props: {
+    y: {
+      type: 'number',
+    },
+  },
+})
 
-// const nPlay = document.querySelector('.play')
-// const play = timeline.getObject('Ball', nPlay, {
-//   props: {
-//     y: {
-//       type: 'number',
-//     },
-//     stretch: {
-//       type: 'number',
-//     },
-//   },
-// })
-
-// play.onValuesChange(newValues => {
-//   nPlay.style.transform = `translateY(${-newValues.y}px)
-//                            scaleY(${newValues.stretch})
-//                            scaleX(${1 / newValues.stretch})`
-// })
+play.onValuesChange(newValues => {
+  nPlay.style.transform = `translateY(${-newValues.y}px)`
+})
 
 /* Custom settings */
 const SETTINGS = {
@@ -56,8 +53,14 @@ const SETTINGS = {
   tsmooth: 0.75,
   clampVEL: 0.02,
 }
-let composer
-let stats
+// basically the next few variables are all feeders for procedural functions such as noise, movement, etc
+let subAvg = 0
+let lowAvg = 0
+let midAvg = 0
+let highAvg = 0
+let time = 0
+let tprev = time
+let composer, stats
 
 /* Init renderer and canvas */
 const container = document.querySelector('.main')
@@ -99,6 +102,16 @@ let analyser
 /* Various event listeners */
 window.addEventListener('resize', onResize)
 
+/* Objects */
+const particleCount = 100000
+const iAttractions = 3
+
+// init particles & attractor
+const particles = new Particles(particleCount)
+scene.add(particles.points)
+
+let attractor = new Vector3()
+
 /* Preloader */
 preloader.init(
   new ImageResolver(),
@@ -128,7 +141,9 @@ preloader
     // create an AudioAnalyser, passing in the sound and desired fftSize
     analyser = new AudioAnalyser(audio, 32)
 
+    // bind and unbind start functionality
     const playButton = document.querySelector('.play')
+
     const start = () => {
       audio.play()
       animate()
@@ -141,7 +156,7 @@ preloader
     /* Actual content of the scene */
   })
 
-/* some stuff with gui */
+/* setup GUI and Stats monitor */
 if (DEVELOPMENT) {
   const dat = require('dat.gui')
   const gui = new dat.GUI({ name: 'GUI' })
@@ -168,7 +183,7 @@ if (DEVELOPMENT) {
   stats.domElement.style.left = 0
 }
 
-/* -------------------------------------------------------------------------------- */
+/* Postprocessing -------------------------------------------------------------------------------- */
 function initPostProcessing() {
   composer = new EffectComposer(renderer)
   const bloomEffect = new BloomEffect()
@@ -201,6 +216,8 @@ function animate() {
   render()
 }
 
+// can we read out Theatre variable with the sound? if so, define certain stages and trigger cutscenes
+
 /**
   Render loop
 */
@@ -209,9 +226,29 @@ function render() {
     stats.begin()
   }
 
+  time += 0.0025
+  tprev = time * SETTINGS.tsmooth
+
+  // calculate sound inputs and use them to render specific outputs
   // get the average frequency of the sound
   const data = analyser.getAverageFrequency()
   console.log(data)
+
+  // set attractor (optionally bind to mouse)
+  attractor.set(Math.cos(-time), Math.sin(time), Math.cos(time))
+
+  // particles
+  particles.update()
+  const particleVertices = particles.points.geometry.vertices
+
+  for (let i = 0; i < particleVertices.length; i++) {
+    const currentVector = particleVertices[i]
+    // than we apply forces of all attractors to particle and calculate direction
+    for (let j = 0; j < iAttractions; j++) {
+      const attraction = particles.calculateForce(attractor, currentVector)
+      particles.applyForce(attraction, i)
+    }
+  }
 
   controls.update()
   if (SETTINGS.useComposer) {
@@ -225,3 +262,5 @@ function render() {
     stats.end()
   }
 }
+
+export { SETTINGS }
