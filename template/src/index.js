@@ -1,29 +1,29 @@
-import './index.css'
+import './scss/index.scss'
 
 import {
   EffectComposer,
   BloomEffect,
-  SMAAEffect,
   RenderPass,
   EffectPass,
+  NoiseEffect,
+  VignetteEffect,
 } from 'postprocessing'
 
 import {
   WebGLRenderer,
   Scene,
+  Color,
   PerspectiveCamera,
-  PointLight,
   Audio,
   AudioListener,
   AudioAnalyser,
-  Vector3,
+  BoxGeometry,
+  MeshStandardMaterial,
+  Mesh,
 } from 'three'
 
 import OrbitControls from './controls/OrbitControls'
 import { preloader } from './loader'
-import { TextureResolver } from './loader/resolvers/TextureResolver'
-import { ImageResolver } from './loader/resolvers/ImageResolver'
-import { GLTFResolver } from './loader/resolvers/GLTFResolver'
 import { AudioResolver } from './loader/resolvers/AudioResolver'
 
 import Particles from './objects/Particles'
@@ -31,7 +31,6 @@ import Theatre from 'theatre'
 
 const project = Theatre.getProject('Theatre demo')
 const timeline = project.getTimeline('Main timeline')
-
 const nPlay = document.querySelector('.play')
 const play = timeline.getObject('Ball', nPlay, {
   props: {
@@ -53,18 +52,15 @@ const SETTINGS = {
   tsmooth: 0.75,
   clampVEL: 0.02,
   addForceInIterations: 1,
+  showAttractor: false,
 }
-// basically the next few variables are all feeders for procedural functions such as noise, movement, etc
-let subAvg = 0
-let lowAvg = 0
-let midAvg = 0
-let highAvg = 0
+
 let time = 0
-let tprev = time
+let tprev
 let composer, stats
 
 /* Init renderer and canvas */
-const container = document.querySelector('.main')
+const container = document.getElementsByTagName('main')[0]
 const renderer = new WebGLRenderer()
 container.style.overflow = 'hidden'
 container.style.margin = 0
@@ -72,26 +68,21 @@ container.appendChild(renderer.domElement)
 renderer.setClearColor(0x3d3b33)
 
 /* Main scene and camera */
+const bgColor = new Color(0x000000)
 const scene = new Scene()
+scene.background = bgColor
+
 const camera = new PerspectiveCamera(
   50,
   window.innerWidth / window.innerHeight,
   0.1,
   1000
 )
-const controls = new OrbitControls(camera)
+const controls = new OrbitControls(camera, container)
 camera.position.z = 10
 controls.enableDamping = true
 controls.dampingFactor = 0.15
 controls.start()
-
-/* Lights */
-const frontLight = new PointLight(0xffffff, 1)
-const backLight = new PointLight(0xffffff, 1)
-scene.add(frontLight)
-scene.add(backLight)
-frontLight.position.set(20, 20, 20)
-backLight.position.set(-20, -20, 20)
 
 /* Audio */
 const listener = new AudioListener()
@@ -104,25 +95,27 @@ let analyser
 window.addEventListener('resize', onResize)
 
 /* Objects */
-const particleCount = 100000
+const particleCount = 10000
 
-// init particles & attractor
+/* init particles & attractor */
 const particles = new Particles(particleCount)
 scene.add(particles.points)
 
-let attractor = new Vector3()
+const attractor = new Mesh(
+  new BoxGeometry(1, 1, 1),
+  new MeshStandardMaterial({
+    color: 0x00ff00,
+    transparent: true,
+    opacity: 0.5,
+  })
+)
+attractor.position.set(0, 0, 0)
+scene.add(attractor)
 
 /* Preloader */
-preloader.init(
-  new ImageResolver(),
-  new GLTFResolver(),
-  new TextureResolver(),
-  new AudioResolver()
-)
+preloader.init(new AudioResolver())
 preloader
   .load([
-    { id: 'searchImage', type: 'image', url: SMAAEffect.searchImageDataURL },
-    { id: 'areaImage', type: 'image', url: SMAAEffect.areaImageDataURL },
     {
       id: 'soundTrack',
       type: 'audio',
@@ -143,17 +136,20 @@ preloader
 
     // bind and unbind start functionality
     const playButton = document.querySelector('.play')
+    const screenStart = document.querySelector('.screen--start')
+    const screenAnimation = document.querySelector('.screen--animation')
 
     const start = () => {
       audio.play()
       animate()
 
-      playButton.style.opacity = 0
+      screenAnimation.classList.remove('hidden')
+      screenStart.classList.add('hidden')
       playButton.removeEventListener('click', start)
     }
     playButton.addEventListener('click', start)
 
-    /* Actual content of the scene */
+    /* Actual content of the scene, such as objects, etc. */
   })
 
 /* setup GUI and Stats monitor */
@@ -178,6 +174,7 @@ if (DEVELOPMENT) {
     .min(1)
     .max(10)
     .step(1)
+  gui.add(SETTINGS, 'showAttractor')
 
   const Stats = require('stats.js')
   stats = new Stats()
@@ -190,18 +187,27 @@ if (DEVELOPMENT) {
 
 /* Postprocessing -------------------------------------------------------------------------------- */
 function initPostProcessing() {
-  // add postprocessing effects: bloomPass, fxaaPass, noise, vignette, dof
   composer = new EffectComposer(renderer)
   const bloomEffect = new BloomEffect()
-  const smaaEffect = new SMAAEffect(
-    preloader.get('searchImage'),
-    preloader.get('areaImage')
+  const noiseEffect = new NoiseEffect({ premultiply: true })
+  const vignetteEffect = new VignetteEffect({
+    offset: 0.171,
+    darkness: 0.475,
+    opacity: 1,
+  })
+  const effectPass = new EffectPass(
+    camera,
+    bloomEffect,
+    noiseEffect,
+    vignetteEffect
   )
-  const effectPass = new EffectPass(camera, smaaEffect, bloomEffect)
   const renderPass = new RenderPass(scene, camera)
+
+  noiseEffect.blendMode.opacity.value = 0.75
+  effectPass.renderToScreen = true
+
   composer.addPass(renderPass)
   composer.addPass(effectPass)
-  effectPass.renderToScreen = true
 }
 
 /**
@@ -218,19 +224,15 @@ function onResize() {
   RAF
 */
 function animate() {
-  window.requestAnimationFrame(animate)
+  requestAnimationFrame(animate)
   render()
 }
-
-// can we read out Theatre variable with the sound? if so, define certain stages and trigger cutscenes
 
 /**
   Render loop
 */
 function render() {
-  if (DEVELOPMENT) {
-    stats.begin()
-  }
+  if (DEVELOPMENT) stats.begin()
 
   time += 0.0025
   tprev = time * SETTINGS.tsmooth
@@ -239,8 +241,13 @@ function render() {
   // get the average frequency of the sound
   const avg = analyser.getAverageFrequency()
 
-  // set attractor (optionally bind to mouse)
-  attractor.set(Math.cos(-time), Math.sin(time), Math.cos(time))
+  // attractor (optionally bind to mouse)
+  attractor.position.set(
+    Math.cos(-time * 3),
+    Math.sin(time * tprev),
+    Math.cos(time)
+  )
+  attractor.visible = SETTINGS.showAttractor
 
   // draw the particles with calculated velocity and acceleration
   particles.update()
@@ -252,7 +259,10 @@ function render() {
     if (avg > 100) {
       for (let j = 0; j < SETTINGS.addForceInIterations; j++) {
         // than we apply forces of all attractors to particle and calculate direction
-        const attraction = particles.calculateForce(attractor, currentVector)
+        const attraction = particles.calculateForce(
+          attractor.position,
+          currentVector
+        )
         particles.applyForce(attraction, i)
       }
     }
@@ -266,9 +276,7 @@ function render() {
     renderer.render(scene, camera)
   }
 
-  if (DEVELOPMENT) {
-    stats.end()
-  }
+  if (DEVELOPMENT) stats.end()
 }
 
 export { SETTINGS }

@@ -3,25 +3,29 @@ import { SETTINGS } from '../index'
 import { randomFloat } from '../utils/helpers'
 
 function Particles(num) {
-  const geometry = new Geometry()
   this.vel = []
   this.acc = []
   this.clampVEL = 1
 
+  const geometry = new Geometry()
+  const material = new PointsMaterial({
+    size: 0.0005,
+    color: 0x3d16d7,
+  })
+
+  this.points = new Points(geometry, material)
+
   for (let i = 0; i < num; ++i) {
-    const vertex = new Vector3(randomFloat(-20, 20), randomFloat(-20, 20), 0)
+    const vertex = new Vector3(
+      randomFloat(-20, 20),
+      randomFloat(-20, 20),
+      randomFloat(-20, 20)
+    )
     geometry.vertices.push(vertex)
 
     this.acc.push(new Vector3())
     this.vel.push(new Vector3())
   }
-
-  const material = new PointsMaterial({
-    size: 0.001,
-    color: 0xffffff,
-  })
-
-  this.points = new Points(geometry, material)
 }
 
 Particles.prototype.update = function() {
