@@ -3,6 +3,9 @@ const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const WebpackMd5Hash = require('webpack-md5-hash')
+// const CleanWebpackPlugin = require('clean-webpack-plugin')
+const WriteFilePlugin = require('write-file-webpack-plugin')
 
 module.exports = env => {
   const isProd = env && env.prod
@@ -13,6 +16,7 @@ module.exports = env => {
       build: './src/index.js',
     },
     plugins: [
+      // new CleanWebpackPlugin('dist', {}),
       new webpack.DefinePlugin({
         DEVELOPMENT: !isProd,
       }),
@@ -32,6 +36,8 @@ module.exports = env => {
             'width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no',
         },
       }),
+      new WebpackMd5Hash(),
+      new WriteFilePlugin(),
     ],
     output: {
       filename: '[name].js',
@@ -55,17 +61,27 @@ module.exports = env => {
           },
         },
         {
-          test: /\.css$/,
+          test: /\.scss$/,
           use: [
-            {
-              loader: MiniCssExtractPlugin.loader,
-              options: {
-                hmr: process.env.NODE_ENV === 'development',
-              },
-            },
+            'style-loader',
+            MiniCssExtractPlugin.loader,
             'css-loader',
+            'postcss-loader',
+            'sass-loader',
           ],
         },
+        // {
+        //   test: /\.css$/,
+        //   use: [
+        //     {
+        //       loader: MiniCssExtractPlugin.loader,
+        //       options: {
+        //         hmr: process.env.NODE_ENV === 'development',
+        //       },
+        //     },
+        //     'css-loader',
+        //   ],
+        // },
         {
           test: /\.mp3$/,
           loader: 'file-loader',
