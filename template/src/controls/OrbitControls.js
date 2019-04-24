@@ -738,7 +738,8 @@ const OrbitControls = function(object, domElement) {
     )
       return
 
-    event.preventDefault()
+    // because there's no passive event listener
+    // event.preventDefault()
     event.stopPropagation()
 
     scope.dispatchEvent(startEvent)
