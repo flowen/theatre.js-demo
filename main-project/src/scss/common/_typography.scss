@@ -1,0 +1,88 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  @include font-body;
+}
+
+p {
+  margin: 0 0 $sp-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @include tablet-landscape-up { margin-bottom: $sp-lg; }
+}
+
+strong {
+  @include font-strong;
+}
+
+sub, sup {
+  font-size: 50%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -1em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4 {
+  @include font-heading;
+  margin: 0 0 $sp-md;
+  color: $color-heading;
+  
+  @include tablet-landscape-up { margin-bottom: $sp-lg; }
+  @include desktop-up { margin-bottom: $sp-xl; }
+}
+
+h1, .h1 { @include font-h1; }
+h2, .h2 { @include font-h2; }
+h3, .h3 { @include font-h3; }
+h4, .h4 { @include font-h4; }
+
+.text {
+  &--lead {
+    @include font-lead;
+  }
+
+  &--strong {
+    @include font-strong;
+  }
+
+  &--small {
+    @include font-small;
+  }
+}
+
+/**
+* Title underline
+*/
+[class*='title--underline'] {
+  display: inline-block;
+  position: relative;
+  margin-bottom: $sp-lg;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    width: 60px;
+    height: 1px;
+    background-color: $color-dark;
+    opacity: 0.5;
+  }
+}
+

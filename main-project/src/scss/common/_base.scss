@@ -1,0 +1,67 @@
+/**
+ * Hide content
+ * {@link https://developer.paciellogroup.com/blog/2012/05/html5-accessibility-chops-hidden-and-aria-hidden/}
+ */
+*[hidden] {
+  display: none !important;
+}
+
+/**
+ * Inheriting box sizing
+ * {@link https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/}
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  background-color: $color-dark;
+  color: $color-white;
+}
+
+/**
+ * Make the image auto resize to the max width of the boundary
+ */
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  display: inline-block;
+  color: $color-white;
+  text-decoration: none;
+
+  &:hover {
+    background-size: 0 1px;
+    background-position: 100% 100%;
+  }
+}
+
+button {
+  @include button-reset;
+}
+
+nav {
+  ul,
+  ol {
+    @extend %list-reset;
+  }
+}
