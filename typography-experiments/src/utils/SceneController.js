@@ -3,7 +3,7 @@
  */
 
 const ENTER = 13
-const SHIFTRIGHT = 16
+const BRACKETRIGHT = 221
 
 export default class SceneController {
   constructor(sceneTimelines) {
@@ -19,7 +19,7 @@ export default class SceneController {
           this.playScene()
           break
 
-        case SHIFTRIGHT:
+        case BRACKETRIGHT:
           this.nextScene()
         default:
           break
