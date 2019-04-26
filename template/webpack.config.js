@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackMd5Hash = require('webpack-md5-hash')
-// const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const WriteFilePlugin = require('write-file-webpack-plugin')
 
 module.exports = env => {
@@ -13,10 +13,20 @@ module.exports = env => {
     mode: isProd ? 'production' : 'development',
     performance: { hints: false },
     entry: {
-      build: './src/index.js',
+      index: './src/index.js',
     },
     plugins: [
-      // new CleanWebpackPlugin('dist', {}),
+      new CleanWebpackPlugin(),
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        filename: 'index.html',
+        chunks: ['index'],
+        title: isProd ? 'Production' : 'Development',
+        meta: {
+          viewport:
+            'width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no',
+        },
+      }),
       new webpack.DefinePlugin({
         DEVELOPMENT: !isProd,
       }),
@@ -26,15 +36,6 @@ module.exports = env => {
         // both options are optional
         filename: '[name].css',
         chunkFilename: '[id].css',
-      }),
-      new HtmlWebpackPlugin({
-        template: './src/index.html',
-        filename: 'index.html',
-        title: isProd ? 'Production' : 'Development',
-        meta: {
-          viewport:
-            'width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no',
-        },
       }),
       new WebpackMd5Hash(),
       new WriteFilePlugin(),
@@ -70,18 +71,6 @@ module.exports = env => {
             'sass-loader',
           ],
         },
-        // {
-        //   test: /\.css$/,
-        //   use: [
-        //     {
-        //       loader: MiniCssExtractPlugin.loader,
-        //       options: {
-        //         hmr: process.env.NODE_ENV === 'development',
-        //       },
-        //     },
-        //     'css-loader',
-        //   ],
-        // },
         {
           test: /\.mp3$/,
           loader: 'file-loader',

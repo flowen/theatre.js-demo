@@ -9,6 +9,8 @@ main {
   right: 0;
   bottom: 0;
   height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
 
   &.hidden {
     opacity: 0;
@@ -24,6 +26,6 @@ main {
   &--audiovisuals {
   }
 
-  &--linear {
+  &--typography {
   }
 }
