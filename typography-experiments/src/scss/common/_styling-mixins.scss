@@ -1,0 +1,50 @@
+// breakpoint mixin
+// https://medium.freecodecamp.org/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862
+@mixin mobile-only {
+  @media (max-width: 599px) { @content; }
+}
+@mixin tablet-portrait-up {
+  @media (min-width: 600px) { @content; }
+}
+@mixin tablet-landscape-up {
+  @media (min-width: 900px) { @content; }
+}
+@mixin desktop-up {
+  @media (min-width: 1200px) { @content; }
+}
+
+%clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin container--inner() {
+  max-width: 88rem;
+  margin: 0 auto;
+  padding-right: $sp-md;
+  padding-left: $sp-md;
+
+  @include mobile-only {
+    padding-right: $sp-sm;
+    padding-left: $sp-sm;
+  }
+}
+
+
+@mixin underline($color-border: $color-primary) {
+  display: block;
+  position: relative;
+  padding-bottom: $sp-sm;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw * (1/32);
+    border-bottom: 3px solid $color-border;
+  }
+}

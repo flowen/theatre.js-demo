@@ -1,0 +1,51 @@
+.scene--typography {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+
+  h1 {
+    text-align: center;
+  }
+
+  .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.2s ease-out;
+
+    &:hover {
+      background-color: rgba($color-yellow, 0.8);
+    }
+
+    &--prev-scene {
+      left: 20px;
+    }
+
+    &--next-scene {
+      right: 20px;
+    }
+  }
+
+  .scene--1 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .duplication {
+      margin: 0 20px;
+    }
+    .words {
+      margin: 3vh 0;
+    }
+  }
+
+  .mask {
+    overflow: hidden;
+
+    .s-1_5 {
+      // height: ;
+    }
+  }
+}
