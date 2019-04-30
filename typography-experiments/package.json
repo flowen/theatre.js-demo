@@ -30,6 +30,7 @@
   "dependencies": {
     "autoprefixer": "^9.5.1",
     "clean-webpack-plugin": "^2.0.1",
+    "computed-variables": "^0.2.0",
     "file-loader": "^3.0.1",
     "node-sass": "^4.11.0",
     "postcss-loader": "^3.0.0",

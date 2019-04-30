@@ -11,7 +11,7 @@
   <body>
     <main>
       <!-- typographic animations controlled by Theatre.js -->
-      <div class="scene--typography">
+      <div class="scene--controller">
         <h1>Scene <span class="scene--label">1</span></h1>
         <div class="scene scene--1">
           <div class="duplication duplication--left">
@@ -36,25 +36,21 @@
         </div>
 
         <div class="scene scene--2">
-          <div class="mask-stagger">
-            <div>Untold</div>
-            <div class="mask-parent">
-              <div class="h1 mask s-1_5">stories</div>
-              <div class="h1 mask s-2_5">stories</div>
-              <div class="h1 mask s-3_5">stories</div>
-              <div class="h1 mask s-4_5">stories</div>
-              <div class="h1 mask">stories</div>
+          <div class="wrapper">
+            <div class="untold" style='--offsetWidth: "offsetWidth";'>
+              Untold
+            </div>
+            <div class="stories">
+              <div class="d-1">stories</div>
+              <div class="d-2">stories</div>
+              <div class="d-3">stories</div>
+              <div class="d-4">stories</div>
+              <div class="d-5">stories</div>
             </div>
           </div>
         </div>
 
-        <div class="scene scene--3">
-          <div class="mask-stagger">
-            <div>3 asdflkja skldfj</div>
-            
-            </div>
-          </div>
-        </div>
+        <div class="scene scene--3"></div>
       </div>
     </main>
   </body>
