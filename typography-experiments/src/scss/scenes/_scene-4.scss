@@ -1,0 +1,32 @@
+.scene--4 {
+  font-size: 100px;
+
+  .un {
+  }
+
+  .derstanding {
+    display: flex;
+
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0 2s;
+      animation: fadeout 2s;
+      animation-delay: var(--delay, 0);
+    }
+  }
+
+  //prettier-ignore
+  @keyframes fadeout {
+    0% { opacity: 1; }
+    10% { opacity: 0.95; }
+    20% { opacity: 0.8; }
+    30% { opacity: 0.9; }
+    40% { opacity: 0.3; }
+    50% { opacity: 0.1; }
+    60% { opacity: 0.5; }
+    70% { opacity: 0.4; }
+    80% { opacity: 0.3; }
+    90% { opacity: 0.1; }
+    100% { opacity: 0; }
+  }
+}

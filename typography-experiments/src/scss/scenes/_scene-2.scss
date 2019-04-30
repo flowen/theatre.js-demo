@@ -1,0 +1,20 @@
+.scene--2 {
+  .un {
+    font-size: 140px;
+    transform-origin: center center;
+    transform: rotate(90deg);
+  }
+
+  .discovered {
+    font-size: 58px;
+
+    .d {
+      &::before {
+        content: 'discovered';
+        display: inline-block;
+        transform: translateY(0%);
+        transition: transform 0.2s ease-out;
+      }
+    }
+  }
+}
