@@ -18,8 +18,8 @@ export default class TextAnimator {
         //prettier-ignore
         const css = `
           transform: translate3d(0, ${props.y}px, 0)
-                      skewX(${props.skewX}deg)
-                      skewY(${props.skewY}deg); 
+                     skewX(${props.skewX}deg)
+                     skewY(${props.skewY}deg); 
           opacity: ${props.opacity};`
 
         el$.nativeObject.style.cssText = css
@@ -44,7 +44,7 @@ export default class TextAnimator {
 
         this.elements.forEach((element, index) => {
           const elTimeline = element.elTimeline
-          const elDuration = element.elTimeline.duration // 2s
+          const elDuration = element.elTimeline.duration
           const elStartTime = index * offsetPerElement
           const elEndTime = elStartTime + elDuration
           //prettier-ignore

@@ -3,29 +3,29 @@
     font-size: 200px;
   }
 
-  .stories {
+  .stories-wrapper {
     font-size: 80px;
     line-height: 0.79;
-    height: 300px;
+    height: 300px; // not sure what to do with this yet
 
-    > div {
+    .stories {
       overflow: hidden;
       margin: 0 0 1px;
     }
 
-    .d-1 {
+    .s-1 {
       height: 3%;
     }
 
-    .d-2 {
+    .s-2 {
       height: 5%;
     }
 
-    .d-3 {
+    .s-3 {
       height: 7%;
     }
 
-    .d-4 {
+    .s-4 {
       height: 11%;
     }
   }

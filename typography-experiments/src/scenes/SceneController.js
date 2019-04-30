@@ -2,7 +2,7 @@
  * @param sceneTimelines - array
  */
 
-const ENTER = 13
+const P = 80
 const BRACKETRIGHT = 221
 const BRACKETLEFT = 219
 
@@ -16,7 +16,7 @@ export default class SceneController {
 
     window.addEventListener('keydown', e => {
       switch (e.keyCode) {
-        case ENTER:
+        case P:
           this.playScene()
           break
 
@@ -44,9 +44,7 @@ export default class SceneController {
   playScene() {
     if (typeof this.sceneTimelines[this.currentScene] === 'undefined') return
 
-    this.sceneTimelines[this.currentScene].forEach(tl => {
-      tl.play()
-    })
+    this.sceneTimelines[this.currentScene].forEach(tl => tl.play())
   }
 
   updateLabel() {

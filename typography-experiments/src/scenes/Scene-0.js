@@ -1,5 +1,5 @@
 /**
- * Scene 0 - duplication
+ * Scene 0 - duplication and stagger
  */
 
 import { project } from '../Theatre-project'
@@ -8,13 +8,13 @@ import TextAnimator from '../utils/TextAnimator'
 export const animateLeftCol = new TextAnimator(
   Array.from(document.querySelectorAll('.duplication--left > .words')),
   project,
-  'Scene 1 - left col'
+  'Scene 0 - left col'
 )
 
 export const animateRightCol = new TextAnimator(
-  //prettier-ignore
-  Array.from(document.querySelectorAll('.duplication--right > .words'))
-    .reverse(),
+  Array.from(
+    document.querySelectorAll('.duplication--right > .words')
+  ).reverse(),
   project,
-  'Scene 1 - right col'
+  'Scene 0 - right col'
 )

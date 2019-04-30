@@ -1,5 +1,5 @@
 export default {
-  revision: '706083cb-7786-478d-8a52-17a2bebaf277',
+  revision: 'aca826d1-5a47-4dbd-aecf-c7c21a0964be',
   definitionVersion: '0.1.0',
   projectState: {
     timelineTemplates: {
@@ -761,7 +761,7 @@ export default {
         },
         duration: 2000,
       },
-      'Scene 1 - left col / Word': {
+      'Scene 0 - left col / Word': {
         objects: {
           Element: {
             props: {
@@ -908,7 +908,7 @@ export default {
         },
         duration: null,
       },
-      'Scene 1 - left col / Sentence': {
+      'Scene 0 - left col / Sentence': {
         objects: {
           'Main controls': {
             props: {
@@ -986,7 +986,7 @@ export default {
         },
         duration: null,
       },
-      'Scene 1 - right col / Word': {
+      'Scene 0 - right col / Word': {
         objects: {
           Element: {
             props: {
@@ -1047,7 +1047,7 @@ export default {
                     },
                     {
                       time: 2000,
-                      value: -15,
+                      value: 15,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType:
@@ -1087,7 +1087,7 @@ export default {
                     },
                     {
                       time: 2000,
-                      value: 15,
+                      value: -15,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType:
@@ -1133,7 +1133,7 @@ export default {
         },
         duration: null,
       },
-      'Scene 1 - right col / Sentence': {
+      'Scene 0 - right col / Sentence': {
         objects: {
           'Main controls': {
             props: {
@@ -1183,6 +1183,442 @@ export default {
                     },
                     {
                       time: 1465,
+                      value: 0,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        },
+        duration: null,
+      },
+      'Scene 1 - untold stories': {
+        objects: {
+          untold: {
+            props: {
+              opacity: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 0,
+                      time: 0,
+                      interpolationDescriptor: {
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        connected: true,
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 170,
+                      value: 1,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+              skewX: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: -2,
+                      time: 0,
+                      interpolationDescriptor: {
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        connected: true,
+                        interpolationType: 'CubicBezier',
+                        handles: [
+                          0.8709746893501968,
+                          6.938893903907228e-18,
+                          0.5,
+                          0,
+                        ],
+                      },
+                    },
+                    {
+                      time: 272.41622020316714,
+                      value: -10,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 362.9758713737183,
+                      value: 0,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+              skewY: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 2,
+                      time: 0,
+                      interpolationDescriptor: {
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        connected: true,
+                        interpolationType: 'CubicBezier',
+                        handles: [1, 0.010989010989010978, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 272.41622020316714,
+                      value: -2,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 362.9758713737183,
+                      value: 0,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+              y: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 150,
+                      time: 2.5,
+                      interpolationDescriptor: {
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        connected: true,
+                        interpolationType: 'CubicBezier',
+                        handles: [
+                          0.9165110654726807,
+                          1.734723475976807e-17,
+                          0.5,
+                          0,
+                        ],
+                      },
+                    },
+                    {
+                      time: 272.41622020316714,
+                      value: -10,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 362.9758713737183,
+                      value: 0,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          stories: {
+            props: {
+              opacity: {
+                valueContainer: {
+                  type: 'StaticValueContainer',
+                  value: 1,
+                },
+              },
+            },
+          },
+        },
+        duration: 1102,
+      },
+      'Scene 1 - stories / Sentence': {
+        objects: {
+          'Main controls': {
+            props: {
+              offsetPerElement: {
+                valueContainer: {
+                  type: 'StaticValueContainer',
+                  value: 100,
+                },
+              },
+              progression: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 0,
+                      time: 600,
+                      interpolationDescriptor: {
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        connected: true,
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 1680,
+                      value: 1,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        },
+        duration: 1677.5,
+      },
+      'Scene 1 - stories / Word': {
+        objects: {
+          Element: {
+            props: {
+              skewX: {
+                valueContainer: {
+                  type: 'StaticValueContainer',
+                  value: 0,
+                },
+              },
+              skewY: {
+                valueContainer: {
+                  type: 'StaticValueContainer',
+                  value: 0,
+                },
+              },
+              y: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 60,
+                      time: 0,
+                      interpolationDescriptor: {
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        connected: true,
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 1000,
+                      value: 0,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+              opacity: {
+                valueContainer: {
+                  type: 'StaticValueContainer',
+                  value: 1,
+                },
+              },
+            },
+          },
+        },
+        duration: 1575,
+      },
+      'Scene 1 - untold': {
+        objects: {
+          untold: {
+            props: {
+              opacity: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 0,
+                      time: 0,
+                      interpolationDescriptor: {
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        connected: true,
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 135,
+                      value: 1,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+              y: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 200,
+                      time: 0,
+                      interpolationDescriptor: {
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        connected: true,
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 472.3338536029323,
+                      value: -10,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 600,
+                      value: 0,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+              skewX: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 2,
+                      time: 0,
+                      interpolationDescriptor: {
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        connected: true,
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 474.8338536029323,
+                      value: -2,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 600,
+                      value: 0,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+              skewY: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 5,
+                      time: 0,
+                      interpolationDescriptor: {
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        connected: true,
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 474.8338536029323,
+                      value: -5,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 600,
                       value: 0,
                       interpolationDescriptor: {
                         connected: false,
