@@ -9,7 +9,7 @@ const BRACKETLEFT = 219
 export default class SceneController {
   constructor(sceneTimelines) {
     this.sceneTimelines = sceneTimelines
-    this.currentScene = 1
+    this.currentScene = 0
     this.sceneLabel = document.querySelector('.scene--label')
     this.scenes = document.querySelectorAll('.scene')
     this.totalScenes = this.scenes.length

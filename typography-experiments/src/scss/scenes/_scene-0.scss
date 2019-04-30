@@ -1,0 +1,14 @@
+.scene--0 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  .duplication {
+    margin: 0 20px;
+  }
+  .words {
+    margin: 3vh 0;
+  }
+}

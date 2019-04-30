@@ -12,9 +12,9 @@ export const animateLeftCol = new TextAnimator(
 )
 
 export const animateRightCol = new TextAnimator(
-  //prettier-ignore
-  Array.from(document.querySelectorAll('.duplication--right > .words'))
-    .reverse(),
+  Array.from(
+    document.querySelectorAll('.duplication--right > .words')
+  ).reverse(),
   project,
   'Scene 1 - right col'
 )
