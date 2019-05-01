@@ -129,7 +129,8 @@ preloader
     dom.loader.classList.add('hidden') // hide the loading screen
     dom.play.classList.remove('hidden') // show the play button
 
-    const start = () => {
+    const start = e => {
+      e.preventDefault()
       console.log('start')
       audio.play()
       animate()

@@ -18,6 +18,10 @@
   }
 
   &__play {
+    display: inline-block;
+    z-index: 100;
+    padding: 20px;
+    border: 1px solid red;
     position: relative;
     overflow: hidden;
     cursor: pointer;
