@@ -1,5 +1,5 @@
 const state = {
-  revision: 'bb72a824-f223-48e2-931f-9629254efe8c',
+  revision: 'dc1648ad-5a12-4617-b158-e59a0e0c08e0',
   definitionVersion: '0.1.0',
   projectState: {
     timelineTemplates: {
@@ -608,6 +608,16 @@ const state = {
                     {
                       time: 16050,
                       value: 55,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 20000,
+                      value: 10,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
