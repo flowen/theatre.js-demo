@@ -667,4 +667,5 @@ const state = {
     },
   },
 }
-export { state }
+
+export default state

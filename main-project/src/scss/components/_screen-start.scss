@@ -1,0 +1,42 @@
+/*
+
+
+*/
+
+.start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+
+  &__loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__play {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: opacity $d-slow $d-slow $ease-in-out;
+
+    &::before {
+      content: ' ';
+      position: absolute;
+      width: 100%;
+      border: 1px solid $color-white;
+      bottom: 0;
+      transform: translateX(-100%);
+      transition: transform $d-slow $ease-in-out-quart;
+    }
+
+    &:hover {
+      &::before {
+        transform: translateX(100%);
+      }
+    }
+  }
+}

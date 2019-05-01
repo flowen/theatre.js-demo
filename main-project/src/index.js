@@ -41,25 +41,32 @@ const SETTINGS = {
   showAttractor: false,
 }
 
+const dom = {
+  main: document.getElementsByTagName('main')[0],
+  screenAnimations: document.querySelector('.screen--animations'),
+  screenStart: document.querySelector('.screen.start'),
+  play: document.querySelector('.start__play'),
+  loader: document.querySelector('.start__loader'),
+  threeContainer: document.querySelector('.screen.threejs'),
+}
+
 let time = 0
 let tprev
 let composer, stats
 
 /* Init renderer and canvas */
-const container = document.getElementsByTagName('main')[0]
 const renderer = new WebGLRenderer()
-container.style.overflow = 'hidden'
-container.style.margin = 0
-container.appendChild(renderer.domElement)
-renderer.setClearColor(0x3d3b33)
+dom.threeContainer.appendChild(renderer.domElement)
+renderer.setClearColor(0x120707)
 
 /* Main scene and camera */
-const bgColor = new Color(0x000000)
+const bgColor = new Color(0x120707)
 const scene = new Scene()
 scene.background = bgColor
 
+/* create camera and controls */
 const camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000)
-const controls = new OrbitControls(camera, container)
+const controls = new OrbitControls(camera, dom.main)
 camera.position.z = 10
 controls.enableDamping = true
 controls.dampingFactor = 0.15
@@ -67,7 +74,7 @@ controls.dampingFactor = 0.15
 // controls.autoRotateSpeed = 1
 controls.start()
 
-/* Audio */
+/* setup Audio */
 const listener = new AudioListener()
 camera.add(listener)
 
@@ -77,10 +84,8 @@ let analyser
 /* Various event listeners */
 window.addEventListener('resize', onResize)
 
-/* Objects */
-const particleCount = 10000
-
 /* init particles & attractor */
+const particleCount = 10000
 const particles = new Particles(particleCount)
 scene.add(particles.points)
 
@@ -95,8 +100,12 @@ const attractor = new Mesh(
 attractor.position.set(0, 0, 0)
 scene.add(attractor)
 
+// unhide the screens, but still hide animations
+dom.main.classList.remove('hide-till-loaded')
+dom.main.classList.add('hide-animations')
+
 /* Preloader */
-preloader.init(new AudioResolver())
+preloader.init(new AudioResolver(dom.loader))
 preloader
   .load([
     {
@@ -117,22 +126,24 @@ preloader
     // create an AudioAnalyser, passing in the sound and desired fftSize
     analyser = new AudioAnalyser(audio, 32)
 
-    // bind and unbind start functionality
-    const playButton = document.querySelector('.play')
-    const screenStart = document.querySelector('.screen--start')
-    const screenAnimation = document.querySelector('.screen--animation')
+    dom.loader.classList.add('hidden') // hide the loading screen
+    dom.play.classList.remove('hidden') // show the play button
 
     const start = () => {
+      console.log('start')
       audio.play()
       animate()
 
-      screenAnimation.classList.remove('hidden')
-      screenStart.classList.add('hidden')
+      dom.screenStart.classList.add('hidden')
+      dom.screenAnimations.classList.remove('hidden')
+
+      // start Theatre timelines
       Scene0.play()
       timelineThreeControls.play()
-      playButton.removeEventListener('click', start)
+
+      dom.play.removeEventListener('click', start)
     }
-    playButton.addEventListener('click', start)
+    dom.play.addEventListener('click', start)
 
     /* Actual content of the scene, such as objects, etc. */
   })
@@ -164,7 +175,8 @@ if (DEVELOPMENT) {
   const Stats = require('stats.js')
   stats = new Stats()
   stats.showPanel(0)
-  container.appendChild(stats.domElement)
+  dom.threeContainer.appendChild(stats.domElement)
+
   stats.domElement.style.position = 'absolute'
   stats.domElement.style.top = 0
   stats.domElement.style.left = 0

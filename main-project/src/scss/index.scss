@@ -15,9 +15,12 @@
 @import 'common/base';
 @import 'common/buttons';
 @import 'common/form';
+@import 'common/hidden';
 
 // Components
-@import 'components/play';
+@import 'components/main';
+@import 'components/canvas-three';
 @import 'components/screen';
+@import 'components/screen-start';
 @import 'components/scenes';
 @import 'components/scene-0';

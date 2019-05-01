@@ -1,10 +1,12 @@
 import { AudioLoader } from 'three'
 
 export class AudioResolver {
-  constructor(renderer) {
+  constructor(preloaderUI) {
     this.type = 'audio'
-    this.renderer = renderer
     this.loader = new AudioLoader()
+    this.percentageUI = document.createElement('span')
+    this.percentageUI.classList.add('percentage')
+    preloaderUI.append(this.percentageUI)
   }
 
   resolve(item) {
@@ -15,7 +17,8 @@ export class AudioResolver {
           resolve(Object.assign(item, { audioBuffer }))
         },
         xhr => {
-          console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+          this.percentageUI.innerHTML = `${parseInt((xhr.loaded / xhr.total) * 100)}% loaded`
+          // console.log(`${parseInt((xhr.loaded / xhr.total) * 100)}% loaded`)
           // xhr.loaded === xhr.total
           //   ? resolve(Object.assign(item, { audio }))
           //   : null

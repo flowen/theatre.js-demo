@@ -1,0 +1,12 @@
+main {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  &.hide-till-loaded {
+    .screen:not(.screen--start) {
+      display: none;
+    }
+  }
+}
