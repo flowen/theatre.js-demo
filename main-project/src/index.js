@@ -142,9 +142,9 @@ preloader
       Scene0.play()
       timelineThreeControls.play()
 
-      dom.play.removeEventListener('click', start)
+      dom.play.removeEventListener('click touchstart', start)
     }
-    dom.play.addEventListener('click', start)
+    dom.play.addEventListener('click touchstart', start)
 
     /* Actual content of the scene, such as objects, etc. */
   })
