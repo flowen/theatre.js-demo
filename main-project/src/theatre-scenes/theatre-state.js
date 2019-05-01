@@ -1,5 +1,5 @@
 const state = {
-  revision: 'f79c06b5-279e-4379-87bb-8464d5c69a79',
+  revision: 'bb72a824-f223-48e2-931f-9629254efe8c',
   definitionVersion: '0.1.0',
   projectState: {
     timelineTemplates: {
@@ -548,11 +548,122 @@ const state = {
               },
             },
           },
+          'Scene 0 - camera': {
+            props: {
+              z: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 10,
+                      time: 0,
+                      interpolationDescriptor: {
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        connected: false,
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
         },
         duration: 20990,
+      },
+      'Scene 3d controls': {
+        objects: {
+          camera: {
+            props: {
+              z: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      time: 2075,
+                      value: 9,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [
+                          1,
+                          0.009341623137341049,
+                          0.4419666067038874,
+                          -0.015193045657452081,
+                        ],
+                      },
+                    },
+                    {
+                      time: 12150,
+                      value: 100,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 16050,
+                      value: 55,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          frequencyLimit: {
+            props: {
+              limit: {
+                valueContainer: {
+                  type: 'StaticValueContainer',
+                  value: -77,
+                },
+              },
+            },
+          },
+          'frequency limit': {
+            props: {
+              frequencyLimit: {
+                valueContainer: {
+                  type: 'BezierCurvesOfScalarValues',
+                  points: [
+                    {
+                      value: 200,
+                      time: 0,
+                      interpolationDescriptor: {
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        connected: false,
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 16700,
+                      value: 120,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        },
+        duration: 33525,
       },
     },
   },
 }
-
-export default state
