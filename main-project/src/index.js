@@ -27,22 +27,8 @@ import { preloader } from './loader'
 import { AudioResolver } from './loader/resolvers/AudioResolver'
 
 import Particles from './objects/Particles'
-import Theatre from 'theatre'
-
-const project = Theatre.getProject('Theatre demo')
-const timeline = project.getTimeline('Main timeline')
-const nPlay = document.querySelector('.play')
-const play = timeline.getObject('Ball', nPlay, {
-  props: {
-    y: {
-      type: 'number',
-    },
-  },
-})
-
-play.onValuesChange(newValues => {
-  nPlay.style.transform = `translateY(${-newValues.y}px)`
-})
+import { timelineThreeControls, frequencyLimit } from './theatre-scenes/threejs-controls'
+import { tlScene0 as Scene0 } from './theatre-scenes/scene-0'
 
 /* Custom settings */
 const SETTINGS = {
@@ -72,16 +58,13 @@ const bgColor = new Color(0x000000)
 const scene = new Scene()
 scene.background = bgColor
 
-const camera = new PerspectiveCamera(
-  50,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-)
+const camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000)
 const controls = new OrbitControls(camera, container)
 camera.position.z = 10
 controls.enableDamping = true
 controls.dampingFactor = 0.15
+// controls.autoRotate = true
+// controls.autoRotateSpeed = 1
 controls.start()
 
 /* Audio */
@@ -119,7 +102,7 @@ preloader
     {
       id: 'soundTrack',
       type: 'audio',
-      url: require('./assets/audio/mert.mp3'),
+      url: require('./assets/audio/untold_story_V2.mp3'),
     },
   ])
   .then(() => {
@@ -145,6 +128,8 @@ preloader
 
       screenAnimation.classList.remove('hidden')
       screenStart.classList.add('hidden')
+      Scene0.play()
+      timelineThreeControls.play()
       playButton.removeEventListener('click', start)
     }
     playButton.addEventListener('click', start)
@@ -195,12 +180,7 @@ function initPostProcessing() {
     darkness: 0.475,
     opacity: 1,
   })
-  const effectPass = new EffectPass(
-    camera,
-    bloomEffect,
-    noiseEffect,
-    vignetteEffect
-  )
+  const effectPass = new EffectPass(camera, bloomEffect, noiseEffect, vignetteEffect)
   const renderPass = new RenderPass(scene, camera)
 
   noiseEffect.blendMode.opacity.value = 0.75
@@ -237,16 +217,8 @@ function render() {
   time += 0.0025
   tprev = time * SETTINGS.tsmooth
 
-  // calculate sound inputs and use them to render specific outputs
-  // get the average frequency of the sound
-  const avg = analyser.getAverageFrequency()
-
   // attractor (optionally bind to mouse)
-  attractor.position.set(
-    Math.cos(-time * 3),
-    Math.sin(time * tprev),
-    Math.cos(time)
-  )
+  attractor.position.set(Math.cos(-time * 3), Math.sin(time * tprev), Math.cos(time))
   attractor.visible = SETTINGS.showAttractor
 
   // draw the particles with calculated velocity and acceleration
@@ -256,27 +228,25 @@ function render() {
   for (let i = 0; i < particleVertices.length; i++) {
     const currentVector = particleVertices[i]
 
-    if (avg > 100) {
+    // calculate sound inputs and use them to render specific outputs
+    // get the average frequency of the sound
+    const avg = analyser.getAverageFrequency() //between 0 and 128
+
+    if (avg > frequencyLimit) {
       for (let j = 0; j < SETTINGS.addForceInIterations; j++) {
-        // than we apply forces of all attractors to particle and calculate direction
-        const attraction = particles.calculateForce(
-          attractor.position,
-          currentVector
-        )
+        // then we apply forces of all attractors to particle and calculate direction
+        const attraction = particles.calculateForce(attractor.position, currentVector)
         particles.applyForce(attraction, i)
       }
     }
   }
 
+  // controls.target = attractor.position
   controls.update()
-  if (SETTINGS.useComposer) {
-    composer.render()
-  } else {
-    renderer.clear()
-    renderer.render(scene, camera)
-  }
+
+  SETTINGS.useComposer ? composer.render() : (renderer.clear(), renderer.render(scene, camera))
 
   if (DEVELOPMENT) stats.end()
 }
 
-export { SETTINGS }
+export { SETTINGS, camera }

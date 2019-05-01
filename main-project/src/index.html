@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet" />
   </head>
   <body>
     <main>
@@ -11,13 +12,21 @@
           <!-- canvas, dat.gui, etc -->
         </div>
 
-        <div class="screen screen--typography">
+        <div class="screen scenes">
           <!-- typographic animations controlled by Theatre.js -->
+          <div class="scene scene--0">
+            <p class="intro">An animation project brought to you by:</p>
+            <ul class="credits">
+              <li>Mert Gincer: sound composer</li>
+              <li>Rou Hun Fan: frontend, design and animations</li>
+              <li>Aria: Theatre.js</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div class="screen screen--start">
-        <div class="play"></div>
+        <a class="play">Play</a>
       </div>
 
       <div class="screen screen--end hidden">

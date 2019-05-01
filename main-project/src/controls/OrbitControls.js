@@ -1,11 +1,4 @@
-import {
-  Vector2,
-  Vector3,
-  Quaternion,
-  Spherical,
-  EventDispatcher,
-  MOUSE,
-} from 'three'
+import { Vector2, Vector3, Quaternion, Spherical, EventDispatcher, MOUSE } from 'three'
 
 /**
  * @author qiao / https://github.com/qiao
@@ -130,10 +123,7 @@ const OrbitControls = function(object, domElement) {
     var offset = new Vector3()
 
     // so camera.up is the orbit axis
-    var quat = new Quaternion().setFromUnitVectors(
-      object.up,
-      new Vector3(0, 1, 0)
-    )
+    var quat = new Quaternion().setFromUnitVectors(object.up, new Vector3(0, 1, 0))
     var quatInverse = quat.clone().inverse()
 
     var lastPosition = new Vector3()
@@ -164,20 +154,14 @@ const OrbitControls = function(object, domElement) {
       )
 
       // restrict phi to be between desired limits
-      spherical.phi = Math.max(
-        scope.minPolarAngle,
-        Math.min(scope.maxPolarAngle, spherical.phi)
-      )
+      spherical.phi = Math.max(scope.minPolarAngle, Math.min(scope.maxPolarAngle, spherical.phi))
 
       spherical.makeSafe()
 
       spherical.radius *= scale
 
       // restrict radius to be between desired limits
-      spherical.radius = Math.max(
-        scope.minDistance,
-        Math.min(scope.maxDistance, spherical.radius)
-      )
+      spherical.radius = Math.max(scope.minDistance, Math.min(scope.maxDistance, spherical.radius))
 
       // move target to panned location
       scope.target.add(panOffset)
@@ -351,8 +335,7 @@ const OrbitControls = function(object, domElement) {
     var offset = new Vector3()
 
     return function pan(deltaX, deltaY) {
-      var element =
-        scope.domElement === document ? scope.domElement.body : scope.domElement
+      var element = scope.domElement === document ? scope.domElement.body : scope.domElement
 
       if (scope.object.isPerspectiveCamera) {
         // perspective
@@ -364,14 +347,8 @@ const OrbitControls = function(object, domElement) {
         targetDistance *= Math.tan(((scope.object.fov / 2) * Math.PI) / 180.0)
 
         // we use only clientHeight here so aspect ratio does not distort speed
-        panLeft(
-          (2 * deltaX * targetDistance) / element.clientHeight,
-          scope.object.matrix
-        )
-        panUp(
-          (2 * deltaY * targetDistance) / element.clientHeight,
-          scope.object.matrix
-        )
+        panLeft((2 * deltaX * targetDistance) / element.clientHeight, scope.object.matrix)
+        panUp((2 * deltaY * targetDistance) / element.clientHeight, scope.object.matrix)
       } else if (scope.object.isOrthographicCamera) {
         // orthographic
         panLeft(
@@ -388,9 +365,7 @@ const OrbitControls = function(object, domElement) {
         )
       } else {
         // camera neither orthographic nor perspective
-        console.warn(
-          'WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.'
-        )
+        console.warn('WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.')
         scope.enablePan = false
       }
     }
@@ -459,12 +434,9 @@ const OrbitControls = function(object, domElement) {
 
     rotateEnd.set(event.clientX, event.clientY)
 
-    rotateDelta
-      .subVectors(rotateEnd, rotateStart)
-      .multiplyScalar(scope.rotateSpeed)
+    rotateDelta.subVectors(rotateEnd, rotateStart).multiplyScalar(scope.rotateSpeed)
 
-    var element =
-      scope.domElement === document ? scope.domElement.body : scope.domElement
+    var element = scope.domElement === document ? scope.domElement.body : scope.domElement
 
     rotateLeft((2 * Math.PI * rotateDelta.x) / element.clientHeight) // yes, height
 
@@ -580,12 +552,9 @@ const OrbitControls = function(object, domElement) {
 
     rotateEnd.set(event.touches[0].pageX, event.touches[0].pageY)
 
-    rotateDelta
-      .subVectors(rotateEnd, rotateStart)
-      .multiplyScalar(scope.rotateSpeed)
+    rotateDelta.subVectors(rotateEnd, rotateStart).multiplyScalar(scope.rotateSpeed)
 
-    var element =
-      scope.domElement === document ? scope.domElement.body : scope.domElement
+    var element = scope.domElement === document ? scope.domElement.body : scope.domElement
 
     rotateLeft((2 * Math.PI * rotateDelta.x) / element.clientHeight) // yes, height
 
@@ -750,12 +719,7 @@ const OrbitControls = function(object, domElement) {
   }
 
   function onKeyDown(event) {
-    if (
-      scope.enabled === false ||
-      scope.enableKeys === false ||
-      scope.enablePan === false
-    )
-      return
+    if (scope.enabled === false || scope.enableKeys === false || scope.enablePan === false) return
 
     handleKeyDown(event)
   }
@@ -856,80 +820,60 @@ Object.defineProperties(OrbitControls.prototype, {
 
   noZoom: {
     get: function() {
-      console.warn(
-        'OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.'
-      )
+      console.warn('OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.')
       return !this.enableZoom
     },
 
     set: function(value) {
-      console.warn(
-        'OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.'
-      )
+      console.warn('OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.')
       this.enableZoom = !value
     },
   },
 
   noRotate: {
     get: function() {
-      console.warn(
-        'OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.'
-      )
+      console.warn('OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.')
       return !this.enableRotate
     },
 
     set: function(value) {
-      console.warn(
-        'OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.'
-      )
+      console.warn('OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.')
       this.enableRotate = !value
     },
   },
 
   noPan: {
     get: function() {
-      console.warn(
-        'OrbitControls: .noPan has been deprecated. Use .enablePan instead.'
-      )
+      console.warn('OrbitControls: .noPan has been deprecated. Use .enablePan instead.')
       return !this.enablePan
     },
 
     set: function(value) {
-      console.warn(
-        'OrbitControls: .noPan has been deprecated. Use .enablePan instead.'
-      )
+      console.warn('OrbitControls: .noPan has been deprecated. Use .enablePan instead.')
       this.enablePan = !value
     },
   },
 
   noKeys: {
     get: function() {
-      console.warn(
-        'OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.'
-      )
+      console.warn('OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.')
       return !this.enableKeys
     },
 
     set: function(value) {
-      console.warn(
-        'OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.'
-      )
+      console.warn('OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.')
       this.enableKeys = !value
     },
   },
 
   staticMoving: {
     get: function() {
-      console.warn(
-        'OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.'
-      )
+      console.warn('OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.')
       return !this.enableDamping
     },
 
     set: function(value) {
-      console.warn(
-        'OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.'
-      )
+      console.warn('OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.')
       this.enableDamping = !value
     },
   },
