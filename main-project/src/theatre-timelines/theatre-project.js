@@ -1,5 +1,5 @@
 import Theatre from 'theatre'
-import state from './theatre-state'
+import { state } from './theatre-state'
 
 Theatre.ui.show()
 

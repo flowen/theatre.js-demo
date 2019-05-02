@@ -5,6 +5,11 @@
   align-items: center;
   text-transform: uppercase;
 
+  &__loader,
+  &__play {
+    position: absolute;
+  }
+
   &__loader {
     display: flex;
     flex-direction: column;

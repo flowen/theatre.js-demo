@@ -1,7 +1,11 @@
 import { timeline } from './theatre-project'
 
+const sceneIntro = document.querySelector('.scene--intro')
 const scene0Objects = Array.from(
-  document.querySelectorAll('.scene--intro .intro, .scene--intro .credits > li')
+  sceneIntro.querySelectorAll(`.intro, 
+                               .credits > li,
+                               .presents,
+                               .title`)
 )
 
 scene0Objects.forEach((obj, i) => {

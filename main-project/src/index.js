@@ -120,9 +120,6 @@ preloader
     audio.setLoop(false)
     audio.setVolume(0.25)
 
-    // const resolver = new AudioResolver('./audio.mp3')
-    // const {audioBuffer} = await resolver.resolve()
-
     async function attachAudioToTimeline() {
       const audioContext = new AudioContext()
       const destinationNode = audioContext.destination
@@ -132,15 +129,10 @@ preloader
         destinationNode,
       })
 
+      // create an AudioAnalyser, passing in the sound and desired fftSize
       analyser = new AudioAnalyser(audio, 32) // use larger fftsize for different average and thus effects?
     }
-
     attachAudioToTimeline()
-    console.log('ready to play')
-
-    // timeline.experimental_attachAudio({ source: AUDIOTRACK })
-
-    // create an AudioAnalyser, passing in the sound and desired fftSize
 
     dom.loader.classList.add('hidden') // hide the loading screen
     dom.play.classList.remove('hidden') // show the play button
@@ -155,7 +147,7 @@ preloader
       timeline.play()
 
       // temporary solution until I can sync the audio from Theatre
-      audio.play()
+      // audio.play()
 
       dom.play.removeEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
     }
