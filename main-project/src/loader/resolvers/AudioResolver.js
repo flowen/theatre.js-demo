@@ -13,9 +13,7 @@ export class AudioResolver {
     return new Promise(resolve => {
       this.loader.load(
         item.url,
-        audioBuffer => {
-          resolve(Object.assign(item, { audioBuffer }))
-        },
+        audioBuffer => resolve(Object.assign(item, { audioBuffer })),
         xhr => {
           this.percentageUI.innerHTML = `${parseInt((xhr.loaded / xhr.total) * 100)}% loaded`
           // console.log(`${parseInt((xhr.loaded / xhr.total) * 100)}% loaded`)

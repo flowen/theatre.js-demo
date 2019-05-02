@@ -17,18 +17,21 @@ import {
   Audio,
   AudioListener,
   AudioAnalyser,
-  BoxGeometry,
-  MeshStandardMaterial,
-  Mesh,
 } from 'three'
 
+// controls, loaders
 import OrbitControls from './controls/OrbitControls'
 import { preloader } from './loader'
 import { AudioResolver } from './loader/resolvers/AudioResolver'
 
+// objects we animate
+import { attractor } from './objects/attractor'
 import Particles from './objects/Particles'
-import { timelineThreeControls, frequencyLimit } from './theatre-scenes/threejs-controls'
-import { timelineScene0 as Scene0 } from './theatre-scenes/scene-0'
+
+// timelines
+import { frequencyLimit } from './theatre-timelines/threejs-controls'
+import { timeline } from './theatre-timelines/theatre-project'
+import './theatre-timelines/scene-intro'
 
 /* Custom settings */
 const SETTINGS = {
@@ -90,17 +93,9 @@ window.addEventListener('resize', onResize)
 const particleCount = 10000
 const particles = new Particles(particleCount)
 scene.add(particles.points)
-
-const attractor = new Mesh(
-  new BoxGeometry(1, 1, 1),
-  new MeshStandardMaterial({
-    color: 0x00ff00,
-    transparent: true,
-    opacity: 0.5,
-  })
-)
-attractor.position.set(0, 0, 0)
 scene.add(attractor)
+
+const is_touch_device = () => !!('ontouchstart' in window)
 
 // unhide the screens, but still hide animations
 dom.main.classList.remove('hide-till-loaded')
@@ -125,38 +120,45 @@ preloader
     audio.setLoop(false)
     audio.setVolume(0.25)
 
+    // const resolver = new AudioResolver('./audio.mp3')
+    // const {audioBuffer} = await resolver.resolve()
+
+    async function attachAudioToTimeline() {
+      const audioContext = new AudioContext()
+      const destinationNode = audioContext.destination
+      await timeline.experimental_attachAudio({
+        decodedBuffer: audioBuffer,
+        audioContext,
+        destinationNode,
+      })
+
+      analyser = new AudioAnalyser(audio, 32) // use larger fftsize for different average and thus effects?
+    }
+
+    attachAudioToTimeline()
+    console.log('ready to play')
+
+    // timeline.experimental_attachAudio({ source: AUDIOTRACK })
+
     // create an AudioAnalyser, passing in the sound and desired fftSize
-    analyser = new AudioAnalyser(audio, 32)
 
     dom.loader.classList.add('hidden') // hide the loading screen
     dom.play.classList.remove('hidden') // show the play button
 
-    const is_touch_device = () => !!('ontouchstart' in window)
-
-    const tt = document.querySelector('.test-touch')
-    tt.innerHTML = 'ontouchstart: ' + is_touch_device()
-
-    const start = e => {
-      e.preventDefault()
-
-      Scene0.experimental_attachAudio({ source: AUDIOTRACK })
-
-      // audio.play()
+    const start = () => {
       animate()
 
       dom.screenStart.classList.add('hidden')
       dom.screenAnimations.classList.remove('hidden')
 
-      // start Theatre timelines
-      Scene0.play()
-      timelineThreeControls.play()
+      // ready? set? ACTION!!!
+      timeline.play()
 
-      // dom.play.removeEventListener('click', start, false)
-      // dom.play.removeEventListener('touchstart', start, false)
+      // temporary solution until I can sync the audio from Theatre
+      audio.play()
+
       dom.play.removeEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
     }
-    // dom.play.addEventListener('click', start, false)
-    // dom.play.addEventListener('ontouchstart', start, false)
     dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
 
     /* Actual content of the scene, such as objects, etc. */

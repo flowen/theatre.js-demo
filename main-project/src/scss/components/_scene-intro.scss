@@ -1,8 +1,5 @@
-.scene--0 {
+.scene--intro {
   flex-direction: column;
-
-  .intro {
-  }
 
   .credits {
     @extend %list-reset;

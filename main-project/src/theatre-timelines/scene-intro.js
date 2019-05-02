@@ -1,12 +1,11 @@
-import { project } from './theatre-project'
+import { timeline } from './theatre-project'
 
-const timelineScene0 = project.getTimeline('Scene 0 timeline')
 const scene0Objects = Array.from(
-  document.querySelectorAll('.scene--0 .intro, .scene--0 .credits > li')
+  document.querySelectorAll('.scene--intro .intro, .scene--intro .credits > li')
 )
 
 scene0Objects.forEach((obj, i) => {
-  scene0Objects[i] = timelineScene0.getObject('Scene 0 - Intro' + i, obj, {
+  scene0Objects[i] = timeline.getObject(`Intro - ${obj.className}(${i})`, obj, {
     props: {
       y: { type: 'number' },
       opacity: { type: 'number' },
@@ -19,5 +18,3 @@ scene0Objects.forEach((obj, i) => {
     scene0Objects[i].nativeObject.style.cssText = css
   })
 })
-
-export { timelineScene0 }
