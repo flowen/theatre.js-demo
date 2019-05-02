@@ -121,17 +121,16 @@ preloader
     audio.setVolume(0.25)
 
     async function attachAudioToTimeline() {
-      const audioContext = new AudioContext()
-      const destinationNode = audioContext.destination
       await timeline.experimental_attachAudio({
         decodedBuffer: audioBuffer,
-        audioContext,
-        destinationNode,
+        audioContext: audio.context,
+        destinationNode: audio.gain,
       })
 
       // create an AudioAnalyser, passing in the sound and desired fftSize
       analyser = new AudioAnalyser(audio, 32) // use larger fftsize for different average and thus effects?
     }
+
     attachAudioToTimeline()
 
     dom.loader.classList.add('hidden') // hide the loading screen
