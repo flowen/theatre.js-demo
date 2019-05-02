@@ -145,9 +145,6 @@ preloader
       // ready? set? ACTION!!!
       timeline.play()
 
-      // temporary solution until I can sync the audio from Theatre
-      // audio.play()
-
       dom.play.removeEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
     }
     dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
