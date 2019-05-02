@@ -28,7 +28,7 @@ import { AudioResolver } from './loader/resolvers/AudioResolver'
 
 import Particles from './objects/Particles'
 import { timelineThreeControls, frequencyLimit } from './theatre-scenes/threejs-controls'
-import { tlScene0 as Scene0 } from './theatre-scenes/scene-0'
+import { timelineScene0 as Scene0 } from './theatre-scenes/scene-0'
 
 /* Custom settings */
 const SETTINGS = {
@@ -78,6 +78,8 @@ controls.start()
 const listener = new AudioListener()
 camera.add(listener)
 
+const AUDIOTRACK = require('./assets/audio/untold_story_V2.mp3')
+
 const audio = new Audio(listener)
 let analyser
 
@@ -111,7 +113,7 @@ preloader
     {
       id: 'soundTrack',
       type: 'audio',
-      url: require('./assets/audio/untold_story_V2.mp3'),
+      url: AUDIOTRACK,
     },
   ])
   .then(() => {
@@ -129,10 +131,17 @@ preloader
     dom.loader.classList.add('hidden') // hide the loading screen
     dom.play.classList.remove('hidden') // show the play button
 
+    const is_touch_device = () => !!('ontouchstart' in window)
+
+    const tt = document.querySelector('.test-touch')
+    tt.innerHTML = 'ontouchstart: ' + is_touch_device()
+
     const start = e => {
       e.preventDefault()
-      console.log('start')
-      audio.play()
+
+      Scene0.experimental_attachAudio({ source: AUDIOTRACK })
+
+      // audio.play()
       animate()
 
       dom.screenStart.classList.add('hidden')
@@ -142,11 +151,13 @@ preloader
       Scene0.play()
       timelineThreeControls.play()
 
-      dom.play.removeEventListener('click', start, false)
-      dom.play.removeEventListener('touchstart', start, false)
+      // dom.play.removeEventListener('click', start, false)
+      // dom.play.removeEventListener('touchstart', start, false)
+      dom.play.removeEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
     }
-    dom.play.addEventListener('click', start, false)
-    dom.play.addEventListener('touchstart', start, false)
+    // dom.play.addEventListener('click', start, false)
+    // dom.play.addEventListener('ontouchstart', start, false)
+    dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
 
     /* Actual content of the scene, such as objects, etc. */
   })

@@ -20,8 +20,7 @@
   &__play {
     display: inline-block;
     z-index: 100;
-    padding: 20px;
-    border: 1px solid red;
+    padding: 5px;
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -33,7 +32,7 @@
       width: 100%;
       border: 1px solid $color-white;
       bottom: 0;
-      transform: translateX(-100%);
+      transform: translateX(calc(-100% - 5px));
       transition: transform $d-slow $ease-in-out-quart;
     }
 

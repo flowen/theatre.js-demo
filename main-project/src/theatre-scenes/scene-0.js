@@ -1,12 +1,12 @@
 import { project } from './theatre-project'
 
-const tlScene0 = project.getTimeline('Scene 0 timeline')
+const timelineScene0 = project.getTimeline('Scene 0 timeline')
 const scene0Objects = Array.from(
   document.querySelectorAll('.scene--0 .intro, .scene--0 .credits > li')
 )
 
 scene0Objects.forEach((obj, i) => {
-  scene0Objects[i] = tlScene0.getObject('Scene 0 - Intro' + i, obj, {
+  scene0Objects[i] = timelineScene0.getObject('Scene 0 - Intro' + i, obj, {
     props: {
       y: { type: 'number' },
       opacity: { type: 'number' },
@@ -20,4 +20,4 @@ scene0Objects.forEach((obj, i) => {
   })
 })
 
-export { tlScene0 }
+export { timelineScene0 }
