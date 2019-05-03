@@ -32,6 +32,7 @@ import Particles from './objects/Particles'
 import { frequencyLimit } from './theatre-timelines/threejs-controls'
 import { timeline } from './theatre-timelines/theatre-project'
 import './theatre-timelines/scene-intro'
+import './theatre-timelines/scene-chorus'
 
 /* Custom settings */
 const SETTINGS = {
@@ -149,7 +150,8 @@ preloader
     }
     dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
 
-    /* Actual content of the scene, such as objects, etc. */
+    // // temp
+    // start()
   })
 
 /* setup GUI and Stats monitor */

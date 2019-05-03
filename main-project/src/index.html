@@ -15,18 +15,41 @@
         </div>
 
         <div class="screen scenes">
-          <!-- typographic animations controlled by Theatre.js -->
+          <!-- typographic animations controlled with Theatre.js -->
           <div class="scene scene--intro">
-            <p class="intro">An animation project brought to you by:</p>
-            <ul class="credits">
-              <li class="credit-item">Mert Gincer: sound composer</li>
-              <li class="credit-item">Rou Hun Fan: frontend, design and animations</li>
-              <li class="credit-item">Aria: Theatre.js</li>
+            <p class="scene__item intro" data-obj-name="intro">
+              An animation project brought to you by:
+            </p>
+            <ul class="scene__item credits" data-obj-name="credits">
+              <li class="credit-item" data-obj-name="credit MG">Mert Gincer: sound composer</li>
+              <li class="credit-item" data-obj-name="credit RH">
+                Rou Hun Fan: frontend, design and animations
+              </li>
+              <li class="credit-item" data-obj-name="credit AR">Aria: Theatre.js</li>
             </ul>
 
-            <p class="presents">Theatrejs presents:</p>
+            <p class="scene__item presents" data-obj-name="presents">Theatrejs presents:</p>
 
-            <h1 class="title">Untold stories</h1>
+            <h1 class="scene__item title" data-obj-name="title">Untold stories</h1>
+          </div>
+
+          <div class="scene scene--chorus">
+            <div class="scene__item intro" data-obj-name="intro">
+              We all walk around with untold stories
+            </div>
+
+            <div class="scene__item question question--1" data-obj-name="question 1">
+              What is an untold story ?
+            </div>
+            <div class="scene__item question question--2" data-obj-name="question 2">
+              Energy that never evolves ?
+            </div>
+            <div class="scene__item question question--3" data-obj-name="question 3">
+              something still to be explored ?
+            </div>
+            <div class="scene__item question question--5" data-obj-name="question 5">
+              Or is searching for an outlet ?
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,12 @@
+.scene--chorus {
+  .word {
+    display: inline;
+
+    &::before:not(&:first-child) {
+      content: ' ';
+    }
+  }
+  .question {
+    display: none;
+  }
+}
