@@ -4,7 +4,7 @@ import Charming from '../utils/charming'
 const sceneChorus = document.querySelector('.scene--chorus')
 
 const sceneQuestions = Array.from(sceneChorus.querySelectorAll(`.intro, .question`))
-sceneQuestions.forEach((sentence, i) => {
+sceneQuestions.forEach(sentence => {
   Charming(sentence, {
     splitRegex: ' ', // .split(' ') but we a space back in with css
     classPrefix: 'word',

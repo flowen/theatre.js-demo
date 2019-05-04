@@ -9,23 +9,28 @@ function Particles(num) {
 
   const geometry = new Geometry()
   const material = new PointsMaterial({
-    size: 0.0005,
+    size: 2,
     color: 0x3d16d7,
+    transparent: true,
+    opacity: 1,
   })
 
   this.points = new Points(geometry, material)
 
   for (let i = 0; i < num; ++i) {
-    const vertex = new Vector3(
-      randomFloat(-20, 20),
-      randomFloat(-20, 20),
-      randomFloat(-20, 20)
-    )
+    const vertex = new Vector3(randomFloat(-20, 20), randomFloat(-20, 20), randomFloat(-20, 20))
     geometry.vertices.push(vertex)
 
     this.acc.push(new Vector3())
     this.vel.push(new Vector3())
   }
+}
+
+/**
+ * @param color
+ */
+Particles.prototype.changeColor = function(color) {
+  this.points.material.color = color
 }
 
 Particles.prototype.update = function() {

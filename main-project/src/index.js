@@ -1,13 +1,6 @@
 import './scss/index.scss'
 
-import {
-  EffectComposer,
-  BloomEffect,
-  RenderPass,
-  EffectPass,
-  NoiseEffect,
-  VignetteEffect,
-} from 'postprocessing'
+import { EffectComposer } from 'postprocessing'
 
 import {
   WebGLRenderer,
@@ -23,16 +16,21 @@ import {
 import OrbitControls from './controls/OrbitControls'
 import { preloader } from './loader'
 import { AudioResolver } from './loader/resolvers/AudioResolver'
+import PPmanager from './controls/PostprocessingManager'
 
 // objects we animate
 import { attractor } from './objects/attractor'
 import Particles from './objects/Particles'
 
 // timelines
-import { frequencyLimit } from './theatre-timelines/threejs-controls'
+import { frequencyLimit, initTheatreProps } from './theatre-timelines/threejs-controls'
 import { timeline } from './theatre-timelines/theatre-project'
 import './theatre-timelines/scene-intro'
 import './theatre-timelines/scene-chorus'
+
+// helpers
+import { map } from './utils/helpers'
+import onResize from './utils/onresize'
 
 /* Custom settings */
 const SETTINGS = {
@@ -56,12 +54,14 @@ const dom = {
 
 let time = 0
 let tprev
-let composer, stats
+let stats
 
 /* Init renderer and canvas */
 const renderer = new WebGLRenderer()
 dom.threeContainer.appendChild(renderer.domElement)
 renderer.setClearColor(0x120707)
+
+let composer = new EffectComposer(renderer)
 
 /* Main scene and camera */
 const bgColor = new Color(0x120707)
@@ -87,9 +87,6 @@ const AUDIOTRACK = require('./assets/audio/untold_story_V2.mp3')
 const audio = new Audio(listener)
 let analyser
 
-/* Various event listeners */
-window.addEventListener('resize', onResize)
-
 /* init particles & attractor */
 const particleCount = 10000
 const particles = new Particles(particleCount)
@@ -113,7 +110,8 @@ preloader
     },
   ])
   .then(() => {
-    initPostProcessing()
+    PPmanager.init()
+    initTheatreProps()
     onResize()
 
     const audioBuffer = preloader.get('soundTrack')
@@ -150,7 +148,7 @@ preloader
     }
     dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
 
-    // // temp
+    // temp for easy timeline editing
     // start()
   })
 
@@ -188,36 +186,6 @@ if (DEVELOPMENT) {
   stats.domElement.style.left = 0
 }
 
-/* Postprocessing -------------------------------------------------------------------------------- */
-function initPostProcessing() {
-  composer = new EffectComposer(renderer)
-  const bloomEffect = new BloomEffect()
-  const noiseEffect = new NoiseEffect({ premultiply: true })
-  const vignetteEffect = new VignetteEffect({
-    offset: 0.171,
-    darkness: 0.475,
-    opacity: 1,
-  })
-  const effectPass = new EffectPass(camera, bloomEffect, noiseEffect, vignetteEffect)
-  const renderPass = new RenderPass(scene, camera)
-
-  noiseEffect.blendMode.opacity.value = 0.75
-  effectPass.renderToScreen = true
-
-  composer.addPass(renderPass)
-  composer.addPass(effectPass)
-}
-
-/**
-  Resize canvas
-*/
-function onResize() {
-  camera.aspect = window.innerWidth / window.innerHeight
-  camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  composer.setSize(window.innerWidth, window.innerHeight)
-}
-
 /**
   RAF
 */
@@ -241,6 +209,13 @@ function render() {
 
   // draw the particles with calculated velocity and acceleration
   particles.update()
+
+  // const r = map(attractor.position.x, -1, 1, 0, 1)
+  // const g = map(attractor.position.y, -1, 1, 0, 1)
+  // const b = map(attractor.position.z, -1, 1, 0, 1)
+
+  // const color = new Color(r, g, b)
+  // particles.changeColor(color)
 
   const particleVertices = particles.points.geometry.vertices
   for (let i = 0; i < particleVertices.length; i++) {
@@ -267,4 +242,4 @@ function render() {
   if (DEVELOPMENT) stats.end()
 }
 
-export { SETTINGS, camera }
+export { SETTINGS, renderer, composer, camera, scene }
