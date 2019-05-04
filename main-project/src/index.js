@@ -13,9 +13,11 @@ import {
 } from 'three'
 
 // controls, loaders
-import OrbitControls from './controls/OrbitControls'
 import { preloader } from './loader'
 import { AudioResolver } from './loader/resolvers/AudioResolver'
+import { TextureResolver } from './loader/resolvers/TextureResolver'
+
+import OrbitControls from './controls/OrbitControls'
 import PPmanager from './controls/PostprocessingManager'
 
 // objects we animate
@@ -104,14 +106,11 @@ dom.main.classList.remove('hide-till-loaded')
 dom.main.classList.add('hide-animations')
 
 /* Preloader */
-preloader.init(new AudioResolver(dom.loader))
+preloader.init(new AudioResolver(dom.loader), new TextureResolver())
 preloader
   .load([
-    {
-      id: 'soundTrack',
-      type: 'audio',
-      url: AUDIOTRACK,
-    },
+    { id: 'soundTrack', type: 'audio', url: AUDIOTRACK },
+    { id: 'perturbation-map', type: 'texture', url: 'src/assets/textures/perturb.jpg' },
   ])
   .then(() => {
     PPmanager.init()

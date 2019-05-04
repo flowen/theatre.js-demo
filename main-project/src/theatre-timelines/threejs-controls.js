@@ -21,6 +21,18 @@ const scanlinePass = {
   opacity: 1,
 }
 
+const vignetteEffect = {
+  offset: 0.16,
+  darkness: 0.5,
+  opacity: 1,
+}
+
+const glitchEffect = {
+  columns: 0.16,
+  weakGlitch: 0.5,
+  strongGlitch: 1,
+}
+
 // camera theatre object
 const camera$ = timeline.getObject('camera', camera, {
   props: {
@@ -67,6 +79,24 @@ const scanlinePass$ = timeline.getObject('scanlinePass', scanlinePass, {
   },
 })
 
+// vignetteEffect pass theatre object
+const vignetteEffect$ = timeline.getObject('vignetteEffect', vignetteEffect, {
+  props: {
+    offset: { type: 'number' },
+    darkness: { type: 'number' },
+    opacity: { type: 'number' },
+  },
+})
+
+// glitchEffect pass theatre object
+const glitchEffect$ = timeline.getObject('glitchEffect', glitchEffect, {
+  props: {
+    columns: { type: 'number' },
+    weakGlitch: { type: 'number' },
+    strongGlitch: { type: 'number' },
+  },
+})
+
 const initTheatreProps = () => {
   camera$.onValuesChange(props => (camera.position.z = props.z))
   frequencyLimit$.onValuesChange(props => (frequencyLimit = props.frequencyLimit))
@@ -82,6 +112,14 @@ const initTheatreProps = () => {
 
   scanlinePass$.onValuesChange(({ density, opacity }) =>
     PPmanager.scanlineControls(density, opacity)
+  )
+
+  vignetteEffect$.onValuesChange(({ offset, darkness, opacity }) =>
+    PPmanager.vignetteControls(offset, darkness, opacity)
+  )
+
+  glitchEffect$.onValuesChange(({ columns, weakGlitch, strongGlitch }) =>
+    PPmanager.glitchControls(columns, weakGlitch, strongGlitch)
   )
 }
 
