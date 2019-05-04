@@ -3,6 +3,7 @@ import { camera } from '../index'
 import PPmanager from '../controls/PostprocessingManager'
 
 let frequencyLimit = 100
+let particleSize = 2 // between 2 and .005
 
 const blurPass = {
   resolution: 1,
@@ -34,6 +35,13 @@ const frequencyLimit$ = timeline.getObject('frequency limit', frequencyLimit, {
   },
 })
 
+// frequencylimit theatre object
+const particleSize$ = timeline.getObject('particle size', particleSize, {
+  props: {
+    particleSize: { type: 'number' },
+  },
+})
+
 // blur pass theatre object
 const blurPass$ = timeline.getObject('blurPass', blurPass, {
   props: {
@@ -62,6 +70,7 @@ const scanlinePass$ = timeline.getObject('scanlinePass', scanlinePass, {
 const initTheatreProps = () => {
   camera$.onValuesChange(props => (camera.position.z = props.z))
   frequencyLimit$.onValuesChange(props => (frequencyLimit = props.frequencyLimit))
+  particleSize$.onValuesChange(props => (particleSize = props.particleSize))
 
   //prettier-ignore
   blurPass$.onValuesChange(({ resolution, opacity }) => 
@@ -76,4 +85,4 @@ const initTheatreProps = () => {
   )
 }
 
-export { frequencyLimit, initTheatreProps }
+export { frequencyLimit, particleSize, initTheatreProps }

@@ -22,8 +22,12 @@ import PPmanager from './controls/PostprocessingManager'
 import { attractor } from './objects/attractor'
 import Particles from './objects/Particles'
 
-// timelines
-import { frequencyLimit, initTheatreProps } from './theatre-timelines/threejs-controls'
+// Theatre
+import {
+  frequencyLimit,
+  particleSize,
+  initTheatreProps,
+} from './theatre-timelines/threejs-controls'
 import { timeline } from './theatre-timelines/theatre-project'
 import './theatre-timelines/scene-intro'
 import './theatre-timelines/scene-chorus'
@@ -147,9 +151,6 @@ preloader
       dom.play.removeEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
     }
     dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
-
-    // temp for easy timeline editing
-    // start()
   })
 
 /* setup GUI and Stats monitor */
@@ -158,17 +159,11 @@ if (DEVELOPMENT) {
   const gui = new dat.GUI({ name: 'GUI' })
 
   gui.add(SETTINGS, 'useComposer')
-  gui.add(SETTINGS, 'followMouse')
   gui
     .add(SETTINGS, 'tsmooth')
     .min(0.01)
     .max(1)
     .step(0.01)
-  gui
-    .add(SETTINGS, 'clampVEL')
-    .min(0.001)
-    .max(1)
-    .step(0.001)
   gui
     .add(SETTINGS, 'addForceInIterations')
     .min(1)
@@ -216,6 +211,7 @@ function render() {
 
   // const color = new Color(r, g, b)
   // particles.changeColor(color)
+  particles.changeSize(particleSize)
 
   const particleVertices = particles.points.geometry.vertices
   for (let i = 0; i < particleVertices.length; i++) {

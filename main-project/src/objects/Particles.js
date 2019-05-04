@@ -33,6 +33,10 @@ Particles.prototype.changeColor = function(color) {
   this.points.material.color = color
 }
 
+Particles.prototype.changeSize = function(size) {
+  this.points.material.size = size
+}
+
 Particles.prototype.update = function() {
   for (let i = 0; i < this.points.geometry.vertices.length; ++i) {
     const vertex = this.points.geometry.vertices[i]

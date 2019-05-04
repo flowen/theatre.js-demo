@@ -59,7 +59,7 @@ class PostProcessingManager {
 
   scanlineControls(density, opacity) {
     this.scanlineEffect.setDensity(density)
-    this.scanlineEffect.blendMode.opacity = opacity
+    this.scanlineEffect.blendMode.opacity.value = opacity
   }
 
   init() {
