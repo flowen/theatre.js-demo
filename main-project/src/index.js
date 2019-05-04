@@ -110,7 +110,7 @@ preloader.init(new AudioResolver(dom.loader), new TextureResolver())
 preloader
   .load([
     { id: 'soundTrack', type: 'audio', url: AUDIOTRACK },
-    { id: 'perturbation-map', type: 'texture', url: 'src/assets/textures/perturb.jpg' },
+    { id: 'perturbation-map', type: 'texture', url: './assets/textures/perturb.jpg' },
   ])
   .then(() => {
     PPmanager.init()
