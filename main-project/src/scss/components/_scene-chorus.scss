@@ -1,12 +1,9 @@
 .scene--chorus {
   .word {
-    display: inline;
+    display: inline-block;
 
     &::before:not(&:first-child) {
-      content: ' ';
+      content: '\00a0';
     }
-  }
-  .question {
-    display: none;
   }
 }
