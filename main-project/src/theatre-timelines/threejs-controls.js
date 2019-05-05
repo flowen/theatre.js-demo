@@ -27,12 +27,6 @@ const vignetteEffect = {
   opacity: 1,
 }
 
-const glitchEffect = {
-  columns: 0.16,
-  weakGlitch: 0.5,
-  strongGlitch: 1,
-}
-
 // camera theatre object
 const camera$ = timeline.getObject('camera', camera, {
   props: {
@@ -88,15 +82,6 @@ const vignetteEffect$ = timeline.getObject('vignetteEffect', vignetteEffect, {
   },
 })
 
-// glitchEffect pass theatre object
-const glitchEffect$ = timeline.getObject('glitchEffect', glitchEffect, {
-  props: {
-    columns: { type: 'number' },
-    weakGlitch: { type: 'number' },
-    strongGlitch: { type: 'number' },
-  },
-})
-
 const initTheatreProps = () => {
   camera$.onValuesChange(props => (camera.position.z = props.z))
   frequencyLimit$.onValuesChange(props => (frequencyLimit = props.frequencyLimit))
@@ -116,10 +101,6 @@ const initTheatreProps = () => {
 
   vignetteEffect$.onValuesChange(({ offset, darkness, opacity }) =>
     PPmanager.vignetteControls(offset, darkness, opacity)
-  )
-
-  glitchEffect$.onValuesChange(({ columns, weakGlitch, strongGlitch }) =>
-    PPmanager.glitchControls(columns, weakGlitch, strongGlitch)
   )
 }
 
