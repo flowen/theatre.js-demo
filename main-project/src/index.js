@@ -120,7 +120,7 @@ preloader
     const audioBuffer = preloader.get('soundTrack')
     audio.setBuffer(audioBuffer)
     audio.setLoop(false)
-    audio.setVolume(0.25)
+    audio.setVolume(0.75)
 
     async function attachAudioToTimeline() {
       await timeline.experimental_attachAudio({
@@ -201,7 +201,7 @@ function render() {
   attractor.position.set(Math.cos(-time * 3), Math.sin(time * tprev), Math.cos(time))
   attractor.visible = SETTINGS.showAttractor
 
-  // draw the particles with calculated velocity and acceleration
+  // draw the particles with (re-)calculated velocity and acceleration
   particles.update()
 
   // const r = map(attractor.position.x, -1, 1, 0, 1)
@@ -224,6 +224,7 @@ function render() {
       for (let j = 0; j < SETTINGS.addForceInIterations; j++) {
         // then we apply forces of all attractors to particle and calculate direction
         const attraction = particles.calculateForce(attractor.position, currentVector)
+
         particles.applyForce(attraction, i)
       }
     }
