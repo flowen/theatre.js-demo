@@ -4,7 +4,6 @@ import {
   BlurPass,
   ChromaticAberrationEffect,
   EffectPass,
-  GlitchEffect,
   NoiseEffect,
   RenderPass,
   SavePass,
@@ -13,7 +12,6 @@ import {
   VignetteEffect,
 } from 'postprocessing'
 
-import { preloader } from '../loader/index'
 import { composer, camera, scene } from '../index'
 
 class PostProcessingManager {
@@ -34,12 +32,6 @@ class PostProcessingManager {
 
     this.chromaticAberrationEffect = new ChromaticAberrationEffect()
 
-    this.glitchEffect = new GlitchEffect({
-      mode: 2,
-      perturbationMap: preloader.get('perturbation-map'),
-      chromaticAberrationOffset: this.chromaticAberrationEffect.offset,
-    })
-
     this.noiseEffect = new NoiseEffect({
       premultiply: true,
     })
@@ -53,12 +45,6 @@ class PostProcessingManager {
     this.vignetteEffect = new VignetteEffect({
       blendFunction: BlendFunction.DARKEN,
     })
-  }
-
-  glitchControls(columns, weakGlitch, strongGlitch) {
-    this.glitchEffect.columns = columns
-    this.glitchEffect.strength.x = weakGlitch
-    this.glitchEffect.strength.y = strongGlitch
   }
 
   vignetteControls(offset, darkness, opacity) {
@@ -93,10 +79,6 @@ class PostProcessingManager {
       this.noiseEffect,
       this.vignetteEffect
     )
-
-    // do this with a re-render of composer?
-    // const glitchPass = new EffectPass(camera, this.glitchEffect, this.chromaticAberrationEffect)
-    // this.glitchEffect.renderToScreen = true
 
     this.noiseEffect.blendMode.opacity.value = 0.75
     effectPass.renderToScreen = true
