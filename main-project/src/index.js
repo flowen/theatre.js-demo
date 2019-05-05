@@ -15,7 +15,6 @@ import {
 // controls, loaders
 import { preloader } from './loader'
 import { AudioResolver } from './loader/resolvers/AudioResolver'
-import { TextureResolver } from './loader/resolvers/TextureResolver'
 
 import OrbitControls from './controls/OrbitControls'
 import PPmanager from './controls/PostprocessingManager'
@@ -106,51 +105,46 @@ dom.main.classList.remove('hide-till-loaded')
 dom.main.classList.add('hide-animations')
 
 /* Preloader */
-preloader.init(new AudioResolver(dom.loader), new TextureResolver())
-preloader
-  .load([
-    { id: 'soundTrack', type: 'audio', url: AUDIOTRACK },
-    { id: 'perturbation-map', type: 'texture', url: './assets/textures/perturb.jpg' },
-  ])
-  .then(() => {
-    PPmanager.init()
-    initTheatreProps()
-    onResize()
+preloader.init(new AudioResolver(dom.loader))
+preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() => {
+  PPmanager.init()
+  initTheatreProps()
+  onResize()
 
-    const audioBuffer = preloader.get('soundTrack')
-    audio.setBuffer(audioBuffer)
-    audio.setLoop(false)
-    audio.setVolume(0.75)
+  const audioBuffer = preloader.get('soundTrack')
+  audio.setBuffer(audioBuffer)
+  audio.setLoop(false)
+  audio.setVolume(0.75)
 
-    async function attachAudioToTimeline() {
-      await timeline.experimental_attachAudio({
-        decodedBuffer: audioBuffer,
-        audioContext: audio.context,
-        destinationNode: audio.gain,
-      })
+  async function attachAudioToTimeline() {
+    await timeline.experimental_attachAudio({
+      decodedBuffer: audioBuffer,
+      audioContext: audio.context,
+      destinationNode: audio.gain,
+    })
 
-      // create an AudioAnalyser, passing in the sound and desired fftSize
-      analyser = new AudioAnalyser(audio, 32) // use larger fftsize for different average and thus effects?
-    }
+    // create an AudioAnalyser, passing in the sound and desired fftSize
+    analyser = new AudioAnalyser(audio, 32) // use larger fftsize for different average and thus effects?
+  }
 
-    attachAudioToTimeline()
+  attachAudioToTimeline()
 
-    dom.loader.classList.add('hidden') // hide the loading screen
-    dom.play.classList.remove('hidden') // show the play button
+  dom.loader.classList.add('hidden') // hide the loading screen
+  dom.play.classList.remove('hidden') // show the play button
 
-    const start = () => {
-      animate()
+  const start = () => {
+    animate()
 
-      dom.screenStart.classList.add('hidden')
-      dom.screenAnimations.classList.remove('hidden')
+    dom.screenStart.classList.add('hidden')
+    dom.screenAnimations.classList.remove('hidden')
 
-      // ready? set? ACTION!!!
-      timeline.play()
+    // ready? set? ACTION!!!
+    timeline.play()
 
-      dom.play.removeEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
-    }
-    dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
-  })
+    dom.play.removeEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
+  }
+  dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
+})
 
 /* setup GUI and Stats monitor */
 if (DEVELOPMENT) {
