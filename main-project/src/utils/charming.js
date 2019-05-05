@@ -20,7 +20,7 @@ module.exports = function(element, options) {
       var node = document.createElement(tagName)
       if (classPrefix) {
         node.className = classPrefix
-        node.dataset.objName = classPrefix + count
+        node.dataset.objName = split[i] + ` (${count})`
         count++
       }
 
