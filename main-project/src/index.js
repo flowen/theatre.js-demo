@@ -123,7 +123,7 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
       destinationNode: audio.gain,
     })
 
-    // create an AudioAnalyser, passing in the sound and desired fftSize
+    // create an AudioAnalyser, passing in the audio and desired fftSize
     analyser = new AudioAnalyser(audio, 32) // use larger fftsize for different average and thus effects?
   }
 
