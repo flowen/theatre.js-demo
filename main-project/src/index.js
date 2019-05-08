@@ -32,6 +32,7 @@ import {
 import { timeline } from './theatre-timelines/theatre-project'
 import './theatre-timelines/scene-intro'
 import './theatre-timelines/scene-chorus'
+import './theatre-timelines/scene-outro'
 
 // helpers
 import { map } from './utils/helpers'
@@ -114,7 +115,7 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
   const audioBuffer = preloader.get('soundTrack')
   audio.setBuffer(audioBuffer)
   audio.setLoop(false)
-  audio.setVolume(0.75)
+  audio.setVolume(0.25)
 
   async function attachAudioToTimeline() {
     await timeline.experimental_attachAudio({
