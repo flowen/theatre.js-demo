@@ -131,10 +131,10 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
 
   attachAudioToTimeline()
 
-  dom.loader.classList.add('hidden') // hide the loading screen
-  dom.screenStartIntro.classList.remove('hidden') // show the play button
+  dom.loader.classList.add('hidden')
+  dom.screenStartIntro.classList.remove('hidden')
 
-  // listen to transitionend for animation
+  // listen to transitionend to know when to start the animation
   dom.screenStart.addEventListener('transitionend', e => {
     if (e.target.classList.contains('screen')) {
       // set ?
@@ -160,6 +160,7 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
 if (DEVELOPMENT) {
   const dat = require('dat.gui')
   const gui = new dat.GUI({ name: 'GUI' })
+  gui.close()
 
   gui.add(SETTINGS, 'useComposer')
   gui

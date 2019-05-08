@@ -20,13 +20,20 @@
     text-align: center;
     align-items: center;
 
-    &.hidden > * {
-      opacity: 0;
+    > * {
+      transform: translateY(0);
     }
 
+    &.hidden > * {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    //prettier-ignore
     @for $i from 1 through 4 {
       > *:nth-child(#{$i}) {
-        transition: opacity $d-slow ($i * $d-slow) $ease-out;
+        transition: opacity 1.75s ($i * .75s) $ease-out-quart,
+                    transform 1.75s ($i * .75s) $ease-out-quart;
       }
     }
 
