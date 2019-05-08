@@ -5,9 +5,7 @@
   right: 0;
   bottom: 0;
 
-  &--end {
-  }
-
-  &--audiovisuals {
+  &--animations {
+    transition: opacity $d-slow $ease-in;
   }
 }

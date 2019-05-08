@@ -134,16 +134,24 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
   dom.loader.classList.add('hidden') // hide the loading screen
   dom.screenStartIntro.classList.remove('hidden') // show the play button
 
+  // listen to transitionend for animation
+  dom.screenStart.addEventListener('transitionend', e => {
+    if (e.target.classList.contains('screen')) {
+      // set ?
+      dom.screenAnimations.classList.remove('hidden')
+
+      // ACTION!!!
+      animate()
+      timeline.play()
+
+      //unbind dom
+      dom.play.removeEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
+    }
+  })
+
   const start = () => {
-    animate()
-
+    // ready? we wait until css animations are done
     dom.screenStart.classList.add('hidden')
-    dom.screenAnimations.classList.remove('hidden')
-
-    // ready? set? ACTION!!!
-    timeline.play()
-
-    dom.play.removeEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
   }
   dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
 })
