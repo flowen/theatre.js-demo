@@ -33,7 +33,8 @@
     @for $i from 1 through 4 {
       > *:nth-child(#{$i}) {
         transition: opacity 1.75s ($i * .75s) $ease-out-quart,
-                    transform 1.75s ($i * .75s) $ease-out-quart;
+                    transform 1.75s ($i * .75s) $ease-out-quart,
+                    color $d-slow $ease-in-out;
       }
     }
 
@@ -60,7 +61,9 @@
   &__play {
     position: relative;
     display: inline-block;
-    margin: 0 0 3rem;
+    margin: 0 0 4rem;
+    padding: 0.5rem 2.3rem;
+    border: 1px solid $color-white;
     z-index: 100;
     overflow: hidden;
     cursor: pointer;
@@ -68,17 +71,22 @@
 
     &::before {
       content: ' ';
+      z-index: -1;
       position: absolute;
-      width: 100%;
-      border: 1px solid $color-white;
+      left: 0;
       bottom: 0;
-      transform: translateX(calc(-100% - 5px));
+      width: 100%;
+      height: 100%;
+      background-color: $color-white;
+      transform: translateX(-110%) skew(17deg, -2deg);
       transition: transform $d-slow $ease-in-out-quart;
     }
 
     &:hover {
+      color: $color-dark;
+
       &::before {
-        transform: translateX(100%);
+        transform: translateX(0) skew(0);
       }
     }
   }
