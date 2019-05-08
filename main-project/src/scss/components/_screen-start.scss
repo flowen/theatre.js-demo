@@ -5,26 +5,49 @@
   align-items: center;
   text-transform: uppercase;
 
-  &__loader,
-  &__play {
-    position: absolute;
-  }
-
   &__loader {
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
   }
 
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    transition: opacity $d-slow $d-slow $ease-in-out;
+
+    &-text {
+      max-width: 540px;
+      margin: 0 0 5rem;
+      font-size: 22px;
+    }
+  }
+
+  &__recommendation {
+    flex-direction: column;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    max-width: 300px;
+    margin: 0 0 8rem;
+  }
+
+  &__icon {
+    margin: 0 0 1rem;
+  }
+
   &__play {
-    display: inline-block;
-    z-index: 100;
-    padding: 5px;
     position: relative;
+    display: inline-block;
+    margin: 0 0 3rem;
+    z-index: 100;
     overflow: hidden;
     cursor: pointer;
-    transition: opacity $d-slow $d-slow $ease-in-out;
+    font-size: 24px;
 
     &::before {
       content: ' ';

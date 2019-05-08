@@ -53,6 +53,7 @@ const dom = {
   main: document.getElementsByTagName('main')[0],
   screenAnimations: document.querySelector('.screen--animations'),
   screenStart: document.querySelector('.screen.start'),
+  screenStartIntro: document.querySelector('.start__intro'),
   play: document.querySelector('.start__play'),
   loader: document.querySelector('.start__loader'),
   threeContainer: document.querySelector('.screen.threejs'),
@@ -131,7 +132,7 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
   attachAudioToTimeline()
 
   dom.loader.classList.add('hidden') // hide the loading screen
-  dom.play.classList.remove('hidden') // show the play button
+  dom.screenStartIntro.classList.remove('hidden') // show the play button
 
   const start = () => {
     animate()

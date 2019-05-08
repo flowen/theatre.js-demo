@@ -7,15 +7,15 @@
   background-color: $color-primary;
   border: 0;
   border-radius: 10px;
-  
-  color: #fff;
+
+  color: $color-white;
   white-space: nowrap;
   text-decoration: none;
   font-family: $primary-font, $fallback-font-stack;
   font-size: $fs-sm;
   line-height: 1;
   text-transform: uppercase;
-  
+
   transition: background-color $d-normal $ease-out;
 
   &:hover {
@@ -28,7 +28,7 @@
   text-decoration: none;
   position: relative;
   overflow: hidden;
-  
+
   &:before,
   &:after {
     content: '';
@@ -37,12 +37,12 @@
     border-bottom: 2px solid $color-primary;
     transition: transform $d-normal $ease-out;
   }
-  
+
   &:before {
     left: 0;
     bottom: 0;
   }
-  
+
   &:after {
     right: 0;
     bottom: 3px;
@@ -50,9 +50,9 @@
 
   &:hover:after {
     transform: translateX(100%);
-    transition-delay: .1s;
+    transition-delay: 0.1s;
   }
-  
+
   &:hover:before {
     transform: translateX(-100%);
   }
