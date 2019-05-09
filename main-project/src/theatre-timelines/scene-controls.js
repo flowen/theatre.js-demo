@@ -1,6 +1,6 @@
 import { audio } from '../index'
 import isTouchDevice from '../utils/isTouchDevice'
-// import toggleFullscreen from '../utils/toggleFullscreen'
+import toggleFullscreen from '../utils/toggleFullscreen'
 
 const fullscreen = document.querySelector('.fullscreen')
 const mute = document.querySelector('.mute')
@@ -11,5 +11,5 @@ function toggleMute() {
     : (audio.setVolume(1), mute.classList.remove('muted'))
 }
 
-// fullscreen.addEventListener(isTouchDevice() ? 'touchstart' : 'click', toggleFullscreen, false)
+fullscreen.addEventListener(isTouchDevice() ? 'touchstart' : 'click', toggleFullscreen, false)
 mute.addEventListener(isTouchDevice() ? 'touchstart' : 'click', toggleMute, false)
