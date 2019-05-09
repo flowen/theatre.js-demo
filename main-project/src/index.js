@@ -37,7 +37,7 @@ import './theatre-timelines/scene-outro'
 
 // helpers
 import { map } from './utils/helpers'
-import onResize from './utils/onresize'
+import onResize from './utils/onResize'
 import isTouchDevice from './utils/isTouchDevice'
 
 /* Custom settings */
