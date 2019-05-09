@@ -5,7 +5,7 @@
  * @gist https://gist.github.com/demonixis/5188326
  */
 
-const toggleFullscreen = event => {
+const toggleFullScreen = event => {
   const element = document.body
 
   if (event instanceof HTMLElement) {
@@ -32,4 +32,4 @@ const toggleFullscreen = event => {
   isFullscreen ? document.cancelFullScreen() : element.requestFullScreen()
 }
 
-export default toggleFullscreen
+export default toggleFullScreen

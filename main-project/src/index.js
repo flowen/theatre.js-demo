@@ -36,7 +36,7 @@ import './theatre-timelines/scene-chorus'
 import './theatre-timelines/scene-outro'
 
 // helpers
-import { map } from './utils/helpers'
+// import { map } from './utils/helpers'
 import onResize from './utils/onResize'
 import isTouchDevice from './utils/isTouchDevice'
 
