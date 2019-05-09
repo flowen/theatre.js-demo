@@ -8,13 +8,7 @@
   .discovered {
     font-size: 58px;
 
-    .d {
-      &::before {
-        content: 'discovered';
-        display: inline-block;
-        transform: translateY(0%);
-        transition: transform 0.2s ease-out;
-      }
+    .word {
     }
   }
 }

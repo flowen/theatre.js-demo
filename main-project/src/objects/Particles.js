@@ -37,6 +37,10 @@ Particles.prototype.changeSize = function(size) {
   this.points.material.size = size
 }
 
+Particles.prototype.reset = function() {}
+Particles.prototype.random = function() {} // same as reset?
+Particles.prototype.pattern = function() {}
+
 Particles.prototype.update = function() {
   for (let i = 0; i < this.points.geometry.vertices.length; ++i) {
     const vertex = this.points.geometry.vertices[i]
@@ -55,6 +59,18 @@ Particles.prototype.update = function() {
   this.points.geometry.verticesNeedUpdate = true
 }
 
+/**
+ * Calculate forces between a particle and a attractor
+ */
+Particles.prototype.calculateForce = (attractorVector, particleVector) => {
+  const f = new Vector3()
+  const force = f.subVectors(attractorVector, particleVector)
+  const distance = force.length()
+
+  force.divideScalar(distance)
+  return force
+}
+
 // apply force for acceleration
 Particles.prototype.applyForce = function(force, i) {
   const f = new Vector3()
@@ -65,15 +81,6 @@ Particles.prototype.applyForce = function(force, i) {
   vel.clampLength(0, SETTINGS.clampVEL)
 
   this.points.geometry.verticesNeedUpdate = true
-}
-
-Particles.prototype.calculateForce = (attractorVector, particleVector) => {
-  const f = new Vector3()
-  const force = f.subVectors(attractorVector, particleVector)
-  const distance = force.length()
-
-  force.divideScalar(distance)
-  return force
 }
 
 export default Particles

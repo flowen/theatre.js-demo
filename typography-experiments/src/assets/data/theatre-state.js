@@ -1,5 +1,5 @@
 export default {
-  revision: 'aca826d1-5a47-4dbd-aecf-c7c21a0964be',
+  revision: '7d666eaa-fd05-46c9-9248-1105b46b5aac',
   definitionVersion: '0.1.0',
   projectState: {
     timelineTemplates: {
@@ -1538,7 +1538,18 @@ export default {
                       },
                     },
                     {
-                      time: 600,
+                      time: 633.6269588542565,
+                      value: 2,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 737.5,
                       value: 0,
                       interpolationDescriptor: {
                         connected: false,
@@ -1578,7 +1589,18 @@ export default {
                       },
                     },
                     {
-                      time: 600,
+                      time: 636.1269588542565,
+                      value: -0.5,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 737.5,
                       value: 0,
                       interpolationDescriptor: {
                         connected: false,
@@ -1618,7 +1640,18 @@ export default {
                       },
                     },
                     {
-                      time: 600,
+                      time: 633.6269588542565,
+                      value: 4,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType:
+                          'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 737.5,
                       value: 0,
                       interpolationDescriptor: {
                         connected: false,
@@ -1634,7 +1667,7 @@ export default {
             },
           },
         },
-        duration: null,
+        duration: 995,
       },
     },
   },

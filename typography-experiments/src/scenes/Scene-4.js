@@ -1,5 +1,5 @@
 /**
- * Scene 4 - understanding
+ * Scene 4 - understanding + fadeout random letter animation
  */
 
 // import { project } from '../Theatre-project'
