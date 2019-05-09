@@ -217,8 +217,8 @@ const OrbitControls = function(object, domElement) {
 
   this.stop = function() {
     scope.domElement.removeEventListener('contextmenu', onContextMenu, false)
-    scope.domElement.removeEventListener('mousedown', onMouseDown, false)
-    scope.domElement.removeEventListener('wheel', onMouseWheel, false)
+    // scope.domElement.removeEventListener('mousedown', onMouseDown, false)
+    // scope.domElement.removeEventListener('wheel', onMouseWheel, false)
 
     scope.domElement.removeEventListener('touchstart', onTouchStart, false)
     scope.domElement.removeEventListener('touchend', onTouchEnd, false)
@@ -227,7 +227,7 @@ const OrbitControls = function(object, domElement) {
     document.removeEventListener('mousemove', onMouseMove, false)
     document.removeEventListener('mouseup', onMouseUp, false)
 
-    window.removeEventListener('keydown', onKeyDown, false)
+    // window.removeEventListener('keydown', onKeyDown, false)
   }
 
   this.start = function() {

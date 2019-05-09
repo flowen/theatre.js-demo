@@ -40,8 +40,13 @@
 
     &-text {
       max-width: 540px;
-      margin: 0 0 4rem;
-      font-size: 22px;
+      margin: 0 0 2rem;
+      font-size: 16px;
+
+      @include tablet-portrait-up {
+        margin-bottom: 4rem;
+        font-size: 22px;
+      }
     }
   }
 
@@ -51,7 +56,11 @@
     flex-wrap: nowrap;
     align-items: center;
     max-width: 300px;
-    margin: 0 0 8rem;
+    margin: 0 0 4rem;
+
+    @include tablet-portrait-up {
+      margin-bottom: 8rem;
+    }
   }
 
   &__icon {
@@ -61,13 +70,18 @@
   &__play {
     position: relative;
     display: inline-block;
-    margin: 0 0 8rem;
+    margin: 0 0 2rem;
     padding: 0.5rem 2.3rem;
     border: 1px solid $color-white;
     z-index: 100;
     overflow: hidden;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 16px;
+
+    @include tablet-portrait-up {
+      font-size: 24px;
+      margin-bottom: 8rem;
+    }
 
     &::before {
       content: ' ';
