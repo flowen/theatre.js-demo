@@ -30,6 +30,7 @@ import {
   initTheatreProps,
 } from './theatre-timelines/threejs-controls'
 import { timeline } from './theatre-timelines/theatre-project'
+import './theatre-timelines/scene-controls'
 import './theatre-timelines/scene-intro'
 import './theatre-timelines/scene-chorus'
 import './theatre-timelines/scene-outro'
@@ -37,6 +38,7 @@ import './theatre-timelines/scene-outro'
 // helpers
 import { map } from './utils/helpers'
 import onResize from './utils/onresize'
+import isTouchDevice from './utils/isTouchDevice'
 
 /* Custom settings */
 const SETTINGS = {
@@ -98,8 +100,6 @@ const particles = new Particles(particleCount)
 scene.add(particles.points)
 scene.add(attractor)
 
-const is_touch_device = () => !!('ontouchstart' in window)
-
 // unhide the screens, but still hide animations
 dom.main.classList.remove('hide-till-loaded')
 dom.main.classList.add('hide-animations')
@@ -143,14 +143,14 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
       timeline.play()
 
       //unbind dom
-      dom.play.removeEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
+      dom.play.removeEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
     }
   })
 
   // ready?
   const start = () => dom.screenStart.classList.add('hidden')
 
-  dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
+  dom.play.addEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
 })
 
 /* setup GUI and Stats monitor */
@@ -240,4 +240,4 @@ function render() {
   if (DEVELOPMENT) stats.end()
 }
 
-export { SETTINGS, renderer, composer, camera, scene }
+export { SETTINGS, renderer, composer, camera, scene, audio }
