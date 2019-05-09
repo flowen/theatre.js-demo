@@ -17,6 +17,7 @@
     "@babel/preset-env": "^7.1.6",
     "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.4",
+    "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "clean-webpack-plugin": "^2.0.1",
     "copy-webpack-plugin": "^5.0.0",
     "css-loader": "^2.1.1",

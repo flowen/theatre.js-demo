@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackMd5Hash = require('webpack-md5-hash')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const WriteFilePlugin = require('write-file-webpack-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
 module.exports = env => {
   const isProd = env && env.prod
@@ -16,6 +17,7 @@ module.exports = env => {
       index: './src/index.js',
     },
     plugins: [
+      new CaseSensitivePathsPlugin(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: './src/index.html',
