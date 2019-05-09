@@ -89,7 +89,7 @@ controls.start()
 const listener = new AudioListener()
 camera.add(listener)
 
-const AUDIOTRACK = require('./assets/audio/untold_story_V2.mp3')
+const AUDIOTRACK = require('./assets/audio/mert gencer (lowkolos) - untold_story.mp3')
 
 const audio = new Audio(listener)
 let analyser

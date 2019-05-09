@@ -5,7 +5,7 @@
  * @gist https://gist.github.com/demonixis/5188326
  */
 
-function toggleFullscreen(event) {
+const toggleFullscreen = event => {
   const element = document.body
 
   if (event instanceof HTMLElement) {
