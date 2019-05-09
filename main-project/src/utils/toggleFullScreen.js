@@ -2,8 +2,10 @@
  * Toggle fullscreen function who work with webkit and firefox.
  * @function toggleFullscreen
  * @param {Object} event
+ * @gist https://gist.github.com/demonixis/5188326
  */
-export default function toggleFullscreen(event) {
+
+function toggleFullscreen(event) {
   const element = document.body
 
   if (event instanceof HTMLElement) {
@@ -29,3 +31,5 @@ export default function toggleFullscreen(event) {
 
   isFullscreen ? document.cancelFullScreen() : element.requestFullScreen()
 }
+
+export default toggleFullscreen
