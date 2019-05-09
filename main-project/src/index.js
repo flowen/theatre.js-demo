@@ -3,13 +3,13 @@ import './scss/index.scss'
 import { EffectComposer } from 'postprocessing'
 
 import {
-  WebGLRenderer,
-  Scene,
-  Color,
-  PerspectiveCamera,
   Audio,
   AudioListener,
   AudioAnalyser,
+  Color,
+  PerspectiveCamera,
+  Scene,
+  WebGLRenderer,
 } from 'three'
 
 // controls, loaders
@@ -77,12 +77,10 @@ scene.background = bgColor
 
 /* create camera and controls */
 const camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000)
-const controls = new OrbitControls(camera, dom.main)
 camera.position.z = 10
+const controls = new OrbitControls(camera, dom.main)
 controls.enableDamping = true
 controls.dampingFactor = 0.15
-// controls.autoRotate = true
-// controls.autoRotateSpeed = 1
 controls.start()
 
 /* setup Audio */
@@ -116,7 +114,7 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
   const audioBuffer = preloader.get('soundTrack')
   audio.setBuffer(audioBuffer)
   audio.setLoop(false)
-  audio.setVolume(0.25)
+  audio.setVolume(1)
 
   async function attachAudioToTimeline() {
     await timeline.experimental_attachAudio({
@@ -149,10 +147,9 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
     }
   })
 
-  const start = () => {
-    // ready? we wait until css animations are done
-    dom.screenStart.classList.add('hidden')
-  }
+  // ready?
+  const start = () => dom.screenStart.classList.add('hidden')
+
   dom.play.addEventListener(is_touch_device() ? 'touchstart' : 'click', start, false)
 })
 

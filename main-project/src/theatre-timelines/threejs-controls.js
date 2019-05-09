@@ -2,8 +2,9 @@ import { timeline } from './theatre-project'
 import { camera } from '../index'
 import PPmanager from '../controls/PostprocessingManager'
 
+let fov = 50
 let frequencyLimit = 100
-let particleSize = 2 // between 2 and .005
+let particleSize = 2
 
 const blurPass = {
   resolution: 1,
@@ -31,6 +32,7 @@ const vignetteEffect = {
 const camera$ = timeline.getObject('camera', camera, {
   props: {
     z: { type: 'number' },
+    fov: { type: 'number' },
   },
 })
 
@@ -83,7 +85,10 @@ const vignetteEffect$ = timeline.getObject('vignetteEffect', vignetteEffect, {
 })
 
 const initTheatreProps = () => {
-  camera$.onValuesChange(props => (camera.position.z = props.z))
+  camera$.onValuesChange(props => {
+    camera.position.z = props.z
+    fov = props.fov
+  })
   frequencyLimit$.onValuesChange(props => (frequencyLimit = props.frequencyLimit))
   particleSize$.onValuesChange(props => (particleSize = props.particleSize))
 
