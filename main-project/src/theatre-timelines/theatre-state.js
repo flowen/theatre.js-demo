@@ -1,5 +1,5 @@
 export const state = {
-  revision: 'ddebd4a1-b236-4437-b5e4-06ffe55cf5ea',
+  revision: 'd9faf1fa-9203-4c3b-b5e0-15ee52954247',
   definitionVersion: '0.1.0',
   projectState: {
     timelineTemplates: {
@@ -23,7 +23,7 @@ export const state = {
                     },
                     {
                       time: 16700,
-                      value: 120,
+                      value: 80,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
@@ -32,7 +32,7 @@ export const state = {
                       },
                     },
                     {
-                      time: 23125,
+                      time: 22950,
                       value: 250,
                       interpolationDescriptor: {
                         connected: false,
@@ -112,8 +112,8 @@ export const state = {
                       },
                     },
                     {
-                      time: 46614.713296859816,
-                      value: 207.0770207363521,
+                      time: 46631,
+                      value: 10,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
@@ -122,8 +122,8 @@ export const state = {
                       },
                     },
                     {
-                      time: 46711.38205804749,
-                      value: 13.653829877274632,
+                      time: 46660,
+                      value: 150,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
@@ -132,8 +132,38 @@ export const state = {
                       },
                     },
                     {
-                      time: 46895.37870973833,
-                      value: 224.7240795598815,
+                      time: 46724.850593561365,
+                      value: 10,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 46761.4723726901,
+                      value: 150,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47075,
+                      value: 10,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47132.57306786128,
+                      value: 150,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
@@ -143,7 +173,7 @@ export const state = {
                     },
                     {
                       time: 47233.702316121045,
-                      value: 205.88235294117646,
+                      value: 10,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
@@ -152,8 +182,8 @@ export const state = {
                       },
                     },
                     {
-                      time: 47241.241685896945,
-                      value: 141.17647058823528,
+                      time: 47277,
+                      value: 150,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
@@ -163,7 +193,7 @@ export const state = {
                     },
                     {
                       time: 47501.85956928413,
-                      value: 142.6470588235294,
+                      value: 10,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
@@ -173,7 +203,7 @@ export const state = {
                     },
                     {
                       time: 47604.58161171051,
-                      value: 213.23529411764707,
+                      value: 150,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
@@ -183,7 +213,7 @@ export const state = {
                     },
                     {
                       time: 47857.70321775511,
-                      value: 135.2941176470588,
+                      value: 10,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
@@ -374,7 +404,12 @@ export const state = {
                         connected: true,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
                         interpolationType: 'CubicBezier',
-                        handles: [0.5, 0, 0.5, 0],
+                        handles: [
+                          0.152150104413306,
+                          0.5764966740576497,
+                          0.8231796902259337,
+                          -0.08869179600886913,
+                        ],
                       },
                     },
                     {
@@ -444,7 +479,7 @@ export const state = {
                     },
                     {
                       time: 79000,
-                      value: -21,
+                      value: 10,
                       interpolationDescriptor: {
                         connected: false,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
@@ -1441,6 +1476,166 @@ export const state = {
                       },
                     },
                     {
+                      time: 46637.5,
+                      value: 4.856418409951791,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 46664,
+                      value: 1,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 46725,
+                      value: 4.856418409951791,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 46758.10125697616,
+                      value: 1,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 46930,
+                      value: 3.856418409951791,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 46970.4307988658,
+                      value: 1,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47042.5,
+                      value: 3.856418409951791,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47065.50810585091,
+                      value: 1,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47302.5,
+                      value: 2.9064184099517907,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47339.98940896039,
+                      value: 1.0467171717171717,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47430,
+                      value: 2.9064184099517907,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47480.67309926753,
+                      value: 1.0467171717171717,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47612.5,
+                      value: 2.856418409951791,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47666.804355637716,
+                      value: 0.8182410037878789,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47762.5,
+                      value: 2.806418409951791,
+                      interpolationDescriptor: {
+                        connected: true,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
+                      time: 47824.99597783165,
+                      value: 1.013991683712419,
+                      interpolationDescriptor: {
+                        connected: false,
+                        __descriptorType: 'TimelinePointInterpolationDescriptor',
+                        interpolationType: 'CubicBezier',
+                        handles: [0.5, 0, 0.5, 0],
+                      },
+                    },
+                    {
                       time: 55250,
                       value: 1,
                       interpolationDescriptor: {
@@ -2121,116 +2316,6 @@ export const state = {
                     },
                     {
                       time: 69710,
-                      value: 0.05,
-                      interpolationDescriptor: {
-                        connected: false,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0.5, 0, 0.5, 0],
-                      },
-                    },
-                    {
-                      time: 79375,
-                      value: 0.15,
-                      interpolationDescriptor: {
-                        connected: true,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0.5, 0, 1.1102230246251565e-16, 0],
-                      },
-                    },
-                    {
-                      time: 79516.75157220145,
-                      value: -0.22357467847821777,
-                      interpolationDescriptor: {
-                        connected: true,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0, -0.08087514870253133, 0.7881294907753106, 0.14705235371717673],
-                      },
-                    },
-                    {
-                      time: 79563,
-                      value: 1.8,
-                      interpolationDescriptor: {
-                        connected: true,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0.5617443532185684, 0.036406977368448466, 0.5, 0],
-                      },
-                    },
-                    {
-                      time: 79640,
-                      value: 0.7,
-                      interpolationDescriptor: {
-                        connected: true,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0.5, 0, 0.3059396354158603, -0.018609487024715717],
-                      },
-                    },
-                    {
-                      time: 79748.78030347251,
-                      value: 1.8,
-                      interpolationDescriptor: {
-                        connected: true,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0.5, 0, 0.5, 0],
-                      },
-                    },
-                    {
-                      time: 79800,
-                      value: -0.2,
-                      interpolationDescriptor: {
-                        connected: false,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0.5, 0, 0.5, 0],
-                      },
-                    },
-                    {
-                      time: 80012,
-                      value: 1,
-                      interpolationDescriptor: {
-                        connected: true,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0.5, 0, 0.5, 0],
-                      },
-                    },
-                    {
-                      time: 80079,
-                      value: 1.6,
-                      interpolationDescriptor: {
-                        connected: true,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0.5, 0, 0.5, 0],
-                      },
-                    },
-                    {
-                      time: 80122.5,
-                      value: 0,
-                      interpolationDescriptor: {
-                        connected: true,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0.5, 0, 0.5, 0],
-                      },
-                    },
-                    {
-                      time: 80192,
-                      value: 1.65,
-                      interpolationDescriptor: {
-                        connected: true,
-                        __descriptorType: 'TimelinePointInterpolationDescriptor',
-                        interpolationType: 'CubicBezier',
-                        handles: [0.5, 0, 0.5, 0],
-                      },
-                    },
-                    {
-                      time: 80252.10493364923,
                       value: 0.05,
                       interpolationDescriptor: {
                         connected: false,
@@ -5547,22 +5632,22 @@ export const state = {
                       },
                     },
                     {
-                      time: 47150,
+                      time: 48038.62304655874,
                       value: 0.975,
                       interpolationDescriptor: {
                         connected: true,
                         __descriptorType: 'TimelinePointInterpolationDescriptor',
                         interpolationType: 'CubicBezier',
                         handles: [
-                          0.7720574993666685,
-                          0.2173640779263941,
+                          0.7808387247266455,
+                          0.11885618280832946,
                           0.12030160528716283,
                           0.2646917789972828,
                         ],
                       },
                     },
                     {
-                      time: 49293.86643020364,
+                      time: 50500,
                       value: 0,
                       interpolationDescriptor: {
                         connected: false,
@@ -5719,7 +5804,7 @@ export const state = {
                       },
                     },
                     {
-                      time: 49293.866,
+                      time: 50125,
                       value: 5,
                       interpolationDescriptor: {
                         connected: false,
@@ -5923,7 +6008,7 @@ export const state = {
                       },
                     },
                     {
-                      time: 49293.866,
+                      time: 50275,
                       value: 5.5,
                       interpolationDescriptor: {
                         connected: false,
@@ -6122,7 +6207,7 @@ export const state = {
                       },
                     },
                     {
-                      time: 49293.866,
+                      time: 50390,
                       value: 4.5,
                       interpolationDescriptor: {
                         connected: false,
@@ -6326,7 +6411,7 @@ export const state = {
                       },
                     },
                     {
-                      time: 49293.866,
+                      time: 50375,
                       value: 6,
                       interpolationDescriptor: {
                         connected: false,
@@ -6525,7 +6610,7 @@ export const state = {
                       },
                     },
                     {
-                      time: 49293.866,
+                      time: 50310,
                       value: 3.5,
                       interpolationDescriptor: {
                         connected: false,
@@ -6729,7 +6814,7 @@ export const state = {
                       },
                     },
                     {
-                      time: 49293.866,
+                      time: 50390.44520677357,
                       value: 7,
                       interpolationDescriptor: {
                         connected: false,
@@ -6928,7 +7013,7 @@ export const state = {
                       },
                     },
                     {
-                      time: 49293.866,
+                      time: 50390.44520677357,
                       value: 5.5,
                       interpolationDescriptor: {
                         connected: false,
@@ -7132,7 +7217,7 @@ export const state = {
                       },
                     },
                     {
-                      time: 49293.866,
+                      time: 50390,
                       value: 4.5,
                       interpolationDescriptor: {
                         connected: false,

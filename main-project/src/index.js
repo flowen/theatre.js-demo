@@ -82,7 +82,7 @@ const AUDIOTRACK = require('./assets/audio/mert gencer (lowkolos) - untold_story
 const audio = new Audio(listener)
 
 /* init particles & attractor */
-const particleCount = 20000
+const particleCount = 10000
 const particles = new Particles(particleCount)
 scene.add(particles.points)
 scene.add(attractor)
