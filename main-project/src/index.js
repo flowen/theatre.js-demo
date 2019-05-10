@@ -1,5 +1,7 @@
 import './scss/index.scss'
 
+import './utils/welcomelog'
+
 import { EffectComposer } from 'postprocessing'
 import { Audio, AudioListener, Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three'
 
