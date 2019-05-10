@@ -23,7 +23,7 @@ module.exports = env => {
         template: './src/index.html',
         filename: 'index.html',
         chunks: ['index'],
-        title: isProd ? 'Production' : 'Development',
+        title: 'TheatreJS demo by Mert Gençer, Rou Hun Fan and Aria Minnaei',
         meta: {
           viewport:
             'width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no',
