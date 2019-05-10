@@ -21,7 +21,9 @@
               An animation project brought to you by:
             </p>
             <ul class="scene__item credits" data-obj-name="credits">
-              <li class="credit-item" data-obj-name="credit MG">Mert Gençer: sound composer</li>
+              <li class="credit-item" data-obj-name="credit MG">
+                Mert Gençer: sound composer
+              </li>
               <li class="credit-item" data-obj-name="credit RH">
                 Rou Hun Fan: frontend, design and animations
               </li>
@@ -65,7 +67,7 @@
           </div>
         </div>
 
-        <div class="scene scene__controls">
+        <div class="screen__controls">
           <button class="mute">
             <svg
               width="22"
@@ -146,7 +148,7 @@
             </p>
           </div>
 
-          <a class="start__play">Play</a>
+          <a class="button start__play">Play</a>
 
           <p class="start__recommendation">
             <svg class="start__icon" viewBox="0 0 16 16" width="16" height="16">
@@ -187,60 +189,82 @@
               href="https://www.google.com/chrome/"
               target="_blank"
               rel="noopener noreferrer nofollow"
-              >Chrome</a
-            >.
+              >Chrome.</a
+            >
           </p>
         </div>
       </div>
 
       <div class="screen end hidden">
-        <div class="credits">
-          <h1>Credits</h1>
+        <h1 class="end__title">Credits</h1>
 
-          <div class="credits__sound">
-            <div class="name">Mert Gençer</div>
-            <a href="http://mert.audio" target="_blank" rel="nooper nofollow noreferrer">website</a>
-            <a
-              href="https://instagram.com/kitchenshelf"
-              target="_blank"
-              rel="nooper nofollow noreferrer"
-              >instagram</a
-            >
-          </div>
-          <div class="credits__animation">
-            <div class="name">Rou Hun Fan</div>
-            <a href="https://flowen.me" target="_blank" rel="nooper nofollow noreferrer">website</a>
-            <a href="https://twitter.com/flowen_nl" target="_blank" rel="nooper nofollow noreferrer"
-              >twitter</a
-            >
-            <a
-              href="https://instagram.com/flowen_nl"
-              target="_blank"
-              rel="nooper nofollow noreferrer"
-              >instagram</a
-            >
-          </div>
-          <div class="credits__theatre">
-            <div class="name">Aria Minaei</div>
-            <a
-              href="https://twitter.com/ariaminaei"
-              target="_blank"
-              rel="nooper nofollow noreferrer"
-              >twitter</a
-            >
-            <a href="https://theatrejs.com" target="_blank" rel="nooper nofollow noreferrer"
-              >Theatre JS</a
-            >
-            <a
-              href="https://github.com/AriaMinaei/TheatreJS"
-              target="_blank"
-              rel="nooper nofollow noreferrer"
-              >Github Theatre JS</a
-            >
-          </div>
-
-          <a class="start__reset">Play again</a>
+        <div class="end__credit credit__sound">
+          <div class="name">Mert Gençer</div>
+          <a
+            href="http://mert.audio"
+            class="end__credit-anchor"
+            target="_blank"
+            rel="nooper nofollow noreferrer"
+            >website</a
+          >
+          <a
+            href="https://instagram.com/kitchenshelf"
+            class="end__credit-anchor"
+            target="_blank"
+            rel="nooper nofollow noreferrer"
+            >instagram</a
+          >
         </div>
+        <div class="end__credit credit__animation">
+          <div class="name">Rou Hun Fan</div>
+          <a
+            href="https://flowen.me"
+            class="end__credit-anchor"
+            target="_blank"
+            rel="nooper nofollow noreferrer"
+            >website</a
+          >
+          <a
+            href="https://twitter.com/flowen_nl"
+            class="end__credit-anchor"
+            target="_blank"
+            rel="nooper nofollow noreferrer"
+            >twitter</a
+          >
+          <a
+            href="https://instagram.com/flowen_nl"
+            class="end__credit-anchor"
+            target="_blank"
+            rel="nooper nofollow noreferrer"
+            >instagram</a
+          >
+        </div>
+        <div class="end__credit credit__theatre">
+          <div class="name">Aria Minaei</div>
+          <a
+            href="https://twitter.com/ariaminaei"
+            class="end__credit-anchor"
+            target="_blank"
+            rel="nooper nofollow noreferrer"
+            >twitter</a
+          >
+          <a
+            href="https://theatrejs.com"
+            class="end__credit-anchor"
+            target="_blank"
+            rel="nooper nofollow noreferrer"
+            >Theatre JS</a
+          >
+          <a
+            href="https://github.com/AriaMinaei/TheatreJS"
+            class="end__credit-anchor"
+            target="_blank"
+            rel="nooper nofollow noreferrer"
+            >Github Theatre JS</a
+          >
+        </div>
+
+        <a class="button end__reset">Play again</a>
       </div>
     </main>
   </body>

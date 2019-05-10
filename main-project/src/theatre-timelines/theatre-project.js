@@ -3,7 +3,10 @@ import { state } from './theatre-state'
 
 Theatre.ui.show()
 
-const project = Theatre.getProject('Theatre demo', { state })
-const timeline = project.getTimeline('Main timeline')
+const TIMELINENAME = 'Main timeline'
 
-export { project, timeline }
+const project = Theatre.getProject('Theatre demo', { state })
+const timeline = project.getTimeline(TIMELINENAME)
+const totalTime = state.projectState.timelineTemplates[TIMELINENAME].duration
+
+export { project, timeline, totalTime }

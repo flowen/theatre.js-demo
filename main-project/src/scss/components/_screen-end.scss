@@ -1,0 +1,47 @@
+.end {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  transition: opacity $d-slow $ease-out;
+
+  > * {
+    transform: translateY(0);
+  }
+
+  &.hidden > * {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  //prettier-ignore
+  @for $i from 1 through 5 {
+    > *:nth-child(#{$i}) {
+      transition: opacity 1.75s ($i * .75s) $ease-out-quart,
+                  transform 1.75s ($i * .75s) $ease-out-quart,
+                  color $d-slow $ease-in-out;
+    }
+  }
+
+  &__title {
+    margin: 0 0 2rem;
+  }
+
+  &__credit {
+    margin: 0 0 2rem;
+  }
+
+  &__credit-anchor {
+    margin: 0 0.1rem;
+  }
+
+  &__reset {
+    margin: 2rem 0 0;
+
+    @include tablet-portrait-up {
+      margin-top: 6rem;
+    }
+  }
+}

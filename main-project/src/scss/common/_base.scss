@@ -45,12 +45,41 @@ img {
 }
 
 a {
+  position: relative;
+  display: inline-block;
   color: $color-white;
   text-decoration: none;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: ' ';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 1px solid $color-white;
+    transition-property: transform;
+    transition-duration: $d-normal;
+  }
+
+  &::before {
+    left: 0;
+    transition-timing-function: $ease-out;
+  }
+
+  &::after {
+    left: -100%;
+    transition-delay: $d-normal;
+    transition-timing-function: $ease-in;
+  }
 
   &:hover {
-    background-size: 0 1px;
-    background-position: 100% 100%;
+    &::before {
+      transform: translateX(100%);
+    }
+    &::after {
+      transform: translateX(100%);
+    }
   }
 }
 

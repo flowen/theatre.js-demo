@@ -1,5 +1,5 @@
 import { timeline } from './theatre-project'
-import { camera } from '../index'
+import { camera, particles } from '../index'
 import PPmanager from '../controls/PostprocessingManager'
 
 let fov = 50
@@ -89,8 +89,9 @@ const initTheatreProps = () => {
     camera.position.z = props.z
     fov = props.fov
   })
+
   frequencyLimit$.onValuesChange(props => (frequencyLimit = props.frequencyLimit))
-  particleSize$.onValuesChange(props => (particleSize = props.particleSize))
+  particleSize$.onValuesChange(props => particles.changeSize(props.particleSize))
 
   //prettier-ignore
   blurPass$.onValuesChange(({ resolution, opacity }) => 
@@ -109,4 +110,4 @@ const initTheatreProps = () => {
   )
 }
 
-export { frequencyLimit, particleSize, initTheatreProps }
+export { frequencyLimit, initTheatreProps }

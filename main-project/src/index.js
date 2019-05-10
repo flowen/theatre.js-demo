@@ -1,16 +1,7 @@
 import './scss/index.scss'
 
 import { EffectComposer } from 'postprocessing'
-
-import {
-  Audio,
-  AudioListener,
-  AudioAnalyser,
-  Color,
-  PerspectiveCamera,
-  Scene,
-  WebGLRenderer,
-} from 'three'
+import { Audio, AudioListener, Color, PerspectiveCamera, Scene, WebGLRenderer } from 'three'
 
 // controls, loaders
 import { preloader } from './loader'
@@ -24,11 +15,8 @@ import { attractor } from './objects/attractor'
 import Particles from './objects/Particles'
 
 // Theatre
-import {
-  frequencyLimit,
-  particleSize,
-  initTheatreProps,
-} from './theatre-timelines/threejs-controls'
+import { attachAudioToTimeline, analyser } from './theatre-timelines/attachAudioToTimeline'
+import { frequencyLimit, initTheatreProps } from './theatre-timelines/threejs-controls'
 import { timeline } from './theatre-timelines/theatre-project'
 import './theatre-timelines/scene-controls'
 import './theatre-timelines/scene-intro'
@@ -36,7 +24,6 @@ import './theatre-timelines/scene-chorus'
 import './theatre-timelines/scene-outro'
 
 // helpers
-// import { map } from './utils/helpers'
 import onResize from './utils/onResize'
 import isTouchDevice from './utils/isTouchDevice'
 
@@ -53,12 +40,14 @@ const SETTINGS = {
 
 const dom = {
   main: document.getElementsByTagName('main')[0],
-  screenAnimations: document.querySelector('.screen--animations'),
-  screenStart: document.querySelector('.screen.start'),
-  screenStartIntro: document.querySelector('.start__intro'),
-  play: document.querySelector('.start__play'),
   loader: document.querySelector('.start__loader'),
-  threeContainer: document.querySelector('.screen.threejs'),
+  screenAnimations: document.querySelector('.screen--animations'),
+  screenThree: document.querySelector('.screen.threejs'),
+  screenStart: document.querySelector('.screen.start'),
+  screenEnd: document.querySelector('.screen.end'),
+  startIntro: document.querySelector('.start__intro'),
+  playButton: document.querySelector('.start__play'),
+  resetButton: document.querySelector('.end__reset'),
 }
 
 let time = 0
@@ -67,7 +56,7 @@ let stats
 
 /* Init renderer and canvas */
 const renderer = new WebGLRenderer()
-dom.threeContainer.appendChild(renderer.domElement)
+dom.screenThree.appendChild(renderer.domElement)
 renderer.setClearColor(0x120707)
 
 let composer = new EffectComposer(renderer)
@@ -90,12 +79,10 @@ const listener = new AudioListener()
 camera.add(listener)
 
 const AUDIOTRACK = require('./assets/audio/mert gencer (lowkolos) - untold_story.mp3')
-
 const audio = new Audio(listener)
-let analyser
 
 /* init particles & attractor */
-const particleCount = 10000
+const particleCount = 20000
 const particles = new Particles(particleCount)
 scene.add(particles.points)
 scene.add(attractor)
@@ -110,29 +97,11 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
   PPmanager.init()
   initTheatreProps()
   onResize()
-
-  const audioBuffer = preloader.get('soundTrack')
-  audio.setBuffer(audioBuffer)
-  audio.setLoop(false)
-  audio.setVolume(1)
-
-  async function attachAudioToTimeline() {
-    await timeline.experimental_attachAudio({
-      decodedBuffer: audioBuffer,
-      audioContext: audio.context,
-      destinationNode: audio.gain,
-    })
-
-    // create an AudioAnalyser, passing in the audio and desired fftSize
-    analyser = new AudioAnalyser(audio, 32) // use larger fftsize for different average and thus effects?
-  }
-
   attachAudioToTimeline()
 
   dom.loader.classList.add('hidden')
-  dom.screenStartIntro.classList.remove('hidden')
+  dom.startIntro.classList.remove('hidden')
 
-  // listen to transitionend to know when to start the animation
   dom.screenStart.addEventListener('transitionend', e => {
     if (e.target.classList.contains('screen')) {
       // set ?
@@ -140,17 +109,16 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
 
       // ACTION!!!
       animate()
-      timeline.play()
+      playTimeline()
 
-      //unbind dom
-      dom.play.removeEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
+      dom.playButton.removeEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
     }
   })
 
   // ready?
   const start = () => dom.screenStart.classList.add('hidden')
 
-  dom.play.addEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
+  dom.playButton.addEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
 })
 
 /* setup GUI and Stats monitor */
@@ -175,7 +143,7 @@ if (DEVELOPMENT) {
   const Stats = require('stats.js')
   stats = new Stats()
   stats.showPanel(0)
-  dom.threeContainer.appendChild(stats.domElement)
+  dom.screenThree.appendChild(stats.domElement)
 
   stats.domElement.style.position = 'absolute'
   stats.domElement.style.top = 0
@@ -183,12 +151,30 @@ if (DEVELOPMENT) {
 }
 
 /**
-  RAF
-*/
+ * ANIMATION
+ */
+
 function animate() {
   requestAnimationFrame(animate)
   render()
 }
+
+const playTimeline = () =>
+  timeline.play().then(finished => (finished ? dom.screenEnd.classList.remove('hidden') : null))
+
+function resetTimeline() {
+  const reset = () => {
+    particles.reset()
+    timeline.time = 0
+    playTimeline()
+
+    dom.screenEnd.removeEventListener('transitionend', reset, false)
+  }
+
+  dom.screenEnd.addEventListener('transitionend', reset, false)
+  dom.screenEnd.classList.add('hidden')
+}
+dom.resetButton.addEventListener('click', resetTimeline, false)
 
 /**
   Render loop
@@ -203,16 +189,8 @@ function render() {
   attractor.position.set(Math.cos(-time * 3), Math.sin(time * tprev), Math.cos(time))
   attractor.visible = SETTINGS.showAttractor
 
-  // draw the particles with (re-)calculated velocity and acceleration
+  controls.update()
   particles.update()
-
-  // const r = map(attractor.position.x, -1, 1, 0, 1)
-  // const g = map(attractor.position.y, -1, 1, 0, 1)
-  // const b = map(attractor.position.z, -1, 1, 0, 1)
-
-  // const color = new Color(r, g, b)
-  // particles.changeColor(color)
-  particles.changeSize(particleSize)
 
   const particleVertices = particles.points.geometry.vertices
   for (let i = 0; i < particleVertices.length; i++) {
@@ -220,11 +198,11 @@ function render() {
 
     // calculate sound inputs and use them to render specific outputs
     // get the average frequency of the sound
-    const avg = analyser.getAverageFrequency() //between 0 and 128
+    const avg = analyser.getAverageFrequency()
 
     if (avg > frequencyLimit) {
       for (let j = 0; j < SETTINGS.addForceInIterations; j++) {
-        // then we apply forces of all attractors to particle and calculate direction
+        // apply forces of all attractors to particle and calculate direction
         const attraction = particles.calculateForce(attractor.position, currentVector)
 
         particles.applyForce(attraction, i)
@@ -232,12 +210,9 @@ function render() {
     }
   }
 
-  // controls.target = attractor.position
-  controls.update()
-
   SETTINGS.useComposer ? composer.render() : (renderer.clear(), renderer.render(scene, camera))
 
   if (DEVELOPMENT) stats.end()
 }
 
-export { SETTINGS, renderer, composer, camera, scene, audio }
+export { SETTINGS, renderer, composer, camera, scene, audio, particles }

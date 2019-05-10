@@ -1,14 +1,20 @@
-.scene__controls {
+.screen__controls {
+  position: absolute;
+  right: 2rem;
+  bottom: 1rem;
+  display: flex;
+
   .mute,
   .fullscreen {
     @include button-reset;
-    position: absolute;
-    bottom: 10px;
   }
 
   .mute {
-    right: 30px;
-    margin: 0 3vw 0 0;
+    margin: 0 1rem 0 0;
+
+    .cross {
+      transition: opacity $d-normal $ease-out;
+    }
 
     &.muted .cross {
       opacity: 0;
@@ -20,8 +26,6 @@
   }
 
   .fullscreen {
-    right: 25px;
-
     polygon {
       fill: $color-white;
     }

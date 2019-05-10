@@ -26,9 +26,6 @@ function Particles(num) {
   }
 }
 
-/**
- * @param color
- */
 Particles.prototype.changeColor = function(color) {
   this.points.material.color = color
 }
@@ -37,9 +34,19 @@ Particles.prototype.changeSize = function(size) {
   this.points.material.size = size
 }
 
-Particles.prototype.reset = function() {}
-Particles.prototype.random = function() {} // same as reset?
-Particles.prototype.pattern = function() {}
+Particles.prototype.reset = function() {
+  for (let i = 0; i < this.points.geometry.vertices.length; ++i) {
+    this.points.geometry.vertices[i] = new Vector3(
+      randomFloat(-20, 20),
+      randomFloat(-20, 20),
+      randomFloat(-20, 20)
+    )
+    this.acc[i] = new Vector3(0, 0, 0)
+    this.vel[i] = new Vector3(0, 0, 0)
+
+    this.points.geometry.verticesNeedUpdate = true
+  }
+}
 
 Particles.prototype.update = function() {
   for (let i = 0; i < this.points.geometry.vertices.length; ++i) {
@@ -51,9 +58,6 @@ Particles.prototype.update = function() {
     acc.clampLength(0, SETTINGS.clampVEL / 2)
     vertex.add(vel)
     vel.clampLength(0, SETTINGS.clampVEL)
-
-    // a very strange effect I can't explain
-    // acc.clampScalar(SETTINGS.clampVEL, SETTINGS.clampVEL);
   }
 
   this.points.geometry.verticesNeedUpdate = true
