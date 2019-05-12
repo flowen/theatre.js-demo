@@ -83,6 +83,21 @@ a {
   }
 }
 
+p a {
+  display: inline;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 button {
   @include button-reset;
 }

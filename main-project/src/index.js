@@ -50,7 +50,7 @@ const dom = {
   startIntro: document.querySelector('.start__intro'),
   playButton: document.querySelector('.start__play'),
   resetButton: document.querySelector('.credits__reset'),
-  openTheatreButton: document.querySelector('.js--open-theatre'),
+  openTheatreButton: document.querySelector('.js--open-theatre-ui'),
 }
 
 let time = 0
@@ -72,6 +72,7 @@ scene.background = bgColor
 /* create camera and controls */
 const camera = new PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000)
 camera.position.z = 10
+
 const controls = new OrbitControls(camera, dom.main)
 controls.enableDamping = true
 controls.dampingFactor = 0.15
@@ -80,8 +81,6 @@ controls.start()
 /* setup Audio */
 const listener = new AudioListener()
 camera.add(listener)
-
-const AUDIOTRACK = require('./assets/audio/mert gencer (lowkolos) - untold_story.mp3')
 const audio = new Audio(listener)
 
 /* init particles & attractor */
@@ -90,50 +89,62 @@ const particles = new Particles(particleCount)
 scene.add(particles.points)
 scene.add(attractor)
 
-// unhide the screens, but still hide animations
+/* Hide everything initially */
 dom.main.classList.remove('hide-till-loaded')
 dom.main.classList.add('hide-animations')
 
 /* Preloader */
 preloader.init(new AudioResolver(dom.loader))
-preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() => {
-  PPmanager.init()
-  initTheatreProps()
-  onResize()
-  attachAudioToTimeline()
+preloader
+  .load([
+    {
+      id: 'soundTrack',
+      type: 'audio',
+      url: require('./assets/audio/mert gencer (lowkolos) - untold_story.mp3'),
+    },
+  ])
+  .then(() => {
+    // audio has loaded, so let's go!
+    PPmanager.init()
+    initTheatreProps()
+    onResize()
+    attachAudioToTimeline()
 
-  dom.loader.classList.add('hidden')
-  dom.startIntro.classList.remove('hidden')
+    // hide loader and show start screen
+    dom.loader.classList.add('hidden')
+    dom.startIntro.classList.remove('hidden')
 
-  dom.screenStart.addEventListener('transitionend', e => {
-    if (e.target.classList.contains('screen')) {
-      // set ?
-      dom.screenAnimations.classList.remove('hidden')
+    // ready?
+    const start = () => dom.screenStart.classList.add('hidden')
+    dom.playButton.addEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
 
-      // ACTION!!!
-      animate()
+    // When css (hiding) animations are finished, we start playing the timeline.
+    dom.screenStart.addEventListener('transitionend', e => {
+      if (e.target.classList.contains('screen')) {
+        // set ?
+        dom.screenAnimations.classList.remove('hidden')
+
+        // ACTION!!!
+        animate()
+        timeline.play()
+
+        dom.playButton.removeEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
+      }
+    })
+
+    // reset the timeline and particles
+    const resetTimeline = () => {
+      particles.reset()
+      timeline.time = 0
       timeline.play()
-
-      dom.playButton.removeEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
     }
+    dom.resetButton.addEventListener('click', resetTimeline, false)
+
+    // click handler to show UI
+    dom.openTheatreButton.addEventListener('click', Theatre.ui.show(), false)
   })
 
-  // ready?
-  const start = () => dom.screenStart.classList.add('hidden')
-
-  dom.playButton.addEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
-
-  const resetTimeline = () => {
-    particles.reset()
-    timeline.time = 0
-    timeline.play()
-  }
-  dom.resetButton.addEventListener('click', resetTimeline, false)
-  // doesn't work like that
-  // dom.openTheatreButton.addEventListener('click', Theatre.ui.show(), false)
-})
-
-/* setup GUI and Stats monitor */
+/* setup tools for development */
 if (DEVELOPMENT) {
   const dat = require('dat.gui')
   const gui = new dat.GUI({ name: 'GUI' })
@@ -180,14 +191,16 @@ function render() {
   time += 0.0025
   tprev = time * SETTINGS.tsmooth
 
-  // attractor (optionally bind to mouse)
+  // The attractor, attracts the particles, based on the force (on line 214)
   attractor.position.set(Math.cos(-time * 3), Math.sin(time * tprev), Math.cos(time))
   attractor.visible = SETTINGS.showAttractor
 
+  // update the controls and particles every frame
   controls.update()
   particles.update()
 
   const particleVertices = particles.points.geometry.vertices
+
   for (let i = 0; i < particleVertices.length; i++) {
     const currentVector = particleVertices[i]
 
