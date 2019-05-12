@@ -17,6 +17,7 @@ import { attractor } from './objects/attractor'
 import Particles from './objects/Particles'
 
 // Theatre
+import Theatre from 'theatre'
 import { attachAudioToTimeline, analyser } from './theatre-timelines/attachAudioToTimeline'
 import { frequencyLimit, initTheatreProps } from './theatre-timelines/threejs-controls'
 import { timeline } from './theatre-timelines/theatre-project'
@@ -46,10 +47,10 @@ const dom = {
   screenAnimations: document.querySelector('.screen--animations'),
   screenThree: document.querySelector('.screen.threejs'),
   screenStart: document.querySelector('.screen.start'),
-  screenEnd: document.querySelector('.screen.end'),
   startIntro: document.querySelector('.start__intro'),
   playButton: document.querySelector('.start__play'),
-  resetButton: document.querySelector('.end__reset'),
+  resetButton: document.querySelector('.credits__reset'),
+  openTheatreButton: document.querySelector('.js--open-theatre'),
 }
 
 let time = 0
@@ -111,7 +112,7 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
 
       // ACTION!!!
       animate()
-      playTimeline()
+      timeline.play()
 
       dom.playButton.removeEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
     }
@@ -121,6 +122,15 @@ preloader.load([{ id: 'soundTrack', type: 'audio', url: AUDIOTRACK }]).then(() =
   const start = () => dom.screenStart.classList.add('hidden')
 
   dom.playButton.addEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
+
+  const resetTimeline = () => {
+    particles.reset()
+    timeline.time = 0
+    timeline.play()
+  }
+  dom.resetButton.addEventListener('click', resetTimeline, false)
+  // doesn't work like that
+  // dom.openTheatreButton.addEventListener('click', Theatre.ui.show(), false)
 })
 
 /* setup GUI and Stats monitor */
@@ -160,23 +170,6 @@ function animate() {
   requestAnimationFrame(animate)
   render()
 }
-
-const playTimeline = () =>
-  timeline.play().then(finished => (finished ? dom.screenEnd.classList.remove('hidden') : null))
-
-function resetTimeline() {
-  const reset = () => {
-    particles.reset()
-    timeline.time = 0
-    playTimeline()
-
-    dom.screenEnd.removeEventListener('transitionend', reset, false)
-  }
-
-  dom.screenEnd.addEventListener('transitionend', reset, false)
-  dom.screenEnd.classList.add('hidden')
-}
-dom.resetButton.addEventListener('click', resetTimeline, false)
 
 /**
   Render loop

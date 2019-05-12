@@ -4,7 +4,13 @@ const sceneOutro = document.querySelector('.scene--outro')
 const sceneObjects = Array.from(
   sceneOutro.querySelectorAll(`.undiscovered, 
                                .unconnected,
-                               .unfinished`)
+                               .unfinished,
+                               .credits__title,
+                               .credit__sound,
+                               .credit__animation,
+                               .credit__theatre,
+                               .credits__explanation,
+                               .credits__reset`)
 )
 
 sceneObjects.forEach((obj, i) => {

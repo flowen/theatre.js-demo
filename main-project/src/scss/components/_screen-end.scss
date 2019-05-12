@@ -1,39 +1,28 @@
-.end {
+.credits {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   text-transform: uppercase;
-  transition: opacity $d-slow $ease-out;
-
-  > * {
-    transform: translateY(0);
-  }
-
-  &.hidden > * {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-
-  //prettier-ignore
-  @for $i from 1 through 5 {
-    > *:nth-child(#{$i}) {
-      transition: opacity 1.75s ($i * .75s) $ease-out-quart,
-                  transform 1.75s ($i * .75s) $ease-out-quart,
-                  color $d-slow $ease-in-out;
-    }
-  }
 
   &__title {
     margin: 0 0 2rem;
   }
 
-  &__credit {
+  &__item {
     margin: 0 0 2rem;
   }
 
-  &__credit-anchor {
+  &__type {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  &__name {
+  }
+
+  &__anchor {
     margin: 0 0.1rem;
   }
 
