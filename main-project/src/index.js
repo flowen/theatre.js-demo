@@ -141,7 +141,7 @@ preloader
     dom.resetButton.addEventListener('click', resetTimeline, false)
 
     // click handler to show UI
-    dom.openTheatreButton.addEventListener('click', Theatre.ui.show(), false)
+    dom.openTheatreButton.addEventListener('click', () => Theatre.ui.restore(), false)
   })
 
 /* setup tools for development */

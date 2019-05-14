@@ -23,7 +23,8 @@ module.exports = env => {
         template: './src/index.html',
         filename: 'index.html',
         chunks: ['index'],
-        title: 'TheatreJS demo by Mert Gençer, Rou Hun Fan and Aria Minnaei',
+        title:
+          'Particle audio-visualization powered by TheatreJS. Collab by Mert Gençer & Rou Hun Fan',
         meta: {
           viewport:
             'width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no',

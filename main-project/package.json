@@ -41,7 +41,7 @@
     "postcss-loader": "^3.0.0",
     "postprocessing": "*",
     "stats.js": "^0.17.0",
-    "theatre": "^0.2.0-dev.2",
+    "theatre": "^0.2.0-dev.3",
     "three": "*"
   }
 }
