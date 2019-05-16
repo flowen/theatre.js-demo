@@ -27,6 +27,7 @@ import './theatre-timelines/scene-chorus'
 import './theatre-timelines/scene-outro'
 
 // helpers
+import './utils/unlockAudio'
 import onResize from './utils/onResize'
 import isTouchDevice from './utils/isTouchDevice'
 
