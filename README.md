@@ -1,14 +1,19 @@
 # Audio-visualiser power by TheatreJS
 
-folders in git:
+[website](https://theatrejs-demo.netlify.com)
 
-main-project
-this is the main project also on display @ https://theatrejs-demo.netlify.com
+This is a demo showing some of the power that *TheatreJS* offers. 
 
-template
+
+**Folders in git**
+
+*main-project/*
+This is the main project
+
+*template/*
 Based on superguigui/threejs-starter-kit and full credits. 
 I added some webpackplugins, theatreJS, audio-resolver, basic particle system and more.
 
-typography-experiments
+*typography-experiments/*
 contains a few typography experiments I made with Theatrejs. Use brackets `[ ]` to 
 go through the experiments and press `p` to play. 
