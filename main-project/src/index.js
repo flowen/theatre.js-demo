@@ -115,18 +115,20 @@ preloader
     dom.startIntro.classList.remove('hidden')
 
     // ready?
-    const start = () => dom.screenStart.classList.add('hidden')
+    const start = () => {
+      dom.screenStart.classList.add('hidden')
+
+      // we MUST start playing it from the function that's attached to the clickhandler
+      // otherwise IOS will not play it. Not even in a setTimeout fired by that function
+      animate()
+      timeline.play()
+    }
     dom.playButton.addEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
 
     // When css (hiding) animations are finished, we start playing the timeline.
     dom.screenStart.addEventListener('transitionend', e => {
       if (e.target.classList.contains('screen')) {
-        // set ?
         dom.screenAnimations.classList.remove('hidden')
-
-        // ACTION!!!
-        animate()
-        timeline.play()
 
         dom.playButton.removeEventListener(isTouchDevice() ? 'touchstart' : 'click', start, false)
       }
