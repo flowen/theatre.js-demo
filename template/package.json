@@ -1,7 +1,7 @@
 {
-  "name": "threejs-starter-kit",
-  "version": "0.2.0",
-  "description": "My workflow for threejs demos",
+  "name": "threejs-starter-kit-AV",
+  "version": "0.1.0",
+  "description": "based on /superguigui/threejs-starter-kit. I added some webpack plugins, SCSS, audio-resolver, TheatreJS and a test mp3 by Mert (lowkolos)",
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --host 0.0.0.0 --open",
@@ -9,7 +9,7 @@
     "now-build": "webpack --env.prod"
   },
   "repository": "superguigui/threejs-starter-kit",
-  "author": "Guillaume Gouessan <guillaume.gouessan+gh@gmail.com>",
+  "author": "Rou Hun Fan <lowen.f@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.1.6",
